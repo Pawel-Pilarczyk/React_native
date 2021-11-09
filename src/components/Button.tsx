@@ -1,16 +1,25 @@
 import React from 'react';
-import {colorPicker} from '../utils/colorPicker';
+import * as colors from '../utils/colors';
 
 import {Pressable, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 
+import {Typography} from './index';
+
 type TButtonProps = {
   type: 'primary' | 'secondary' | 'ghost';
+  textColor: string;
   children: string | JSX.Element;
   onPress: () => void;
   style?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
 };
 
-export const Button = ({type, children, onPress, style = {}}: TButtonProps) => {
+export const Button = ({
+  type,
+  children,
+  textColor,
+  onPress,
+  style = {},
+}: TButtonProps) => {
   const buttonStyles = [
     styles.button,
     type === 'primary' && styles.buttonPrimary,
@@ -20,9 +29,10 @@ export const Button = ({type, children, onPress, style = {}}: TButtonProps) => {
   ];
 
   return (
-    <Pressable onPress={onPress} style={[buttonStyles]}>
-      {children}
-      {/* // put Typography inside */}
+    <Pressable onPress={onPress} style={buttonStyles}>
+      <Typography color={textColor} size={18} type={'medium'}>
+        {children}
+      </Typography>
     </Pressable>
   );
 };
@@ -35,13 +45,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   buttonPrimary: {
-    backgroundColor: colorPicker.violet,
+    backgroundColor: colors.VIOLET,
   },
   buttonSecondary: {
-    backgroundColor: colorPicker.violetLight,
+    backgroundColor: colors.VIOLET_LIGHT,
   },
   buttonGhost: {
-    borderColor: colorPicker.violetLight,
+    borderColor: colors.VIOLET_LIGHT,
     borderWidth: 1,
   },
 });
