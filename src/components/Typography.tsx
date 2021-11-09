@@ -4,9 +4,9 @@ import {colorPicker} from '../utils/colorPicker';
 
 import {Text, TextStyle, StyleProp} from 'react-native';
 
-type TFontType = 'Regular' | 'Medium' | 'Bold';
+type TFontType = 'Regular' | 'Medium' | 'Bold'; //change to lowecase
 type TSize = 16 | 18 | 24 | 32 | 64;
-type TColor = 'black' | 'violet' | 'white' | 'grey';
+type TColor = 'black' | 'violet' | 'white' | 'grey'; // change to str
 
 type TTypograpthyProps = {
   children: string | JSX.Element;
@@ -36,7 +36,7 @@ export const Typography = ({
     fontFamily: fontFamily,
     fontSize: size,
     color: colorPicker[color],
-    ...(style as Record<string, unknown>),
+    style,
   };
   return <Text style={textStyles}>{innerContent}</Text>;
 };
