@@ -1,5 +1,5 @@
 import React from 'react';
-import {firstCharToUpperCase} from '../utils/stringConversions';
+import {firstCharToUpperCase, normalize} from '../utils/';
 
 import {Text, TextStyle, StyleProp} from 'react-native';
 
@@ -25,14 +25,18 @@ export const Typography = ({
 }: TTypograpthyProps) => {
   const fontFamily = `Inter-${type ? firstCharToUpperCase(type) : 'Regular'}`;
 
-  const textStyle = [
-    {
-      fontFamily: fontFamily,
-      fontSize: size,
-      color: color,
-      textTransform: toUpperCase ? 'uppercase' : 'none',
-    },
-    style,
-  ];
-  return <Text style={textStyle as TextStyle}>{children}</Text>;
+  return (
+    <Text
+      style={[
+        {
+          fontFamily: fontFamily,
+          fontSize: normalize(size, 'width'),
+          color: color,
+          textTransform: toUpperCase ? 'uppercase' : 'none',
+        },
+        style,
+      ]}>
+      {children}
+    </Text>
+  );
 };
