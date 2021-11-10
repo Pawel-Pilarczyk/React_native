@@ -3,7 +3,7 @@ import {firstCharToUpperCase} from '../utils/stringConversions';
 
 import {Text, TextStyle, StyleProp} from 'react-native';
 
-type TFontType = 'regular' | 'medium' | 'bold'; //change to lowecase
+type TFontType = 'regular' | 'medium' | 'semiBold' | 'bold';
 type TSize = 16 | 18 | 24 | 32 | 64;
 
 type TTypograpthyProps = {
@@ -11,7 +11,7 @@ type TTypograpthyProps = {
   type?: TFontType;
   size?: TSize;
   color?: string;
-  capitalize?: boolean;
+  toUpperCase?: boolean;
   style?: StyleProp<TextStyle> | StyleProp<TextStyle>[];
 };
 
@@ -20,19 +20,19 @@ export const Typography = ({
   type,
   size = 16,
   color = 'white',
-  capitalize,
+  toUpperCase,
   style = {},
 }: TTypograpthyProps) => {
   const fontFamily = `Inter-${type ? firstCharToUpperCase(type) : 'Regular'}`;
 
-  const styles = [
+  const textStyle = [
     {
       fontFamily: fontFamily,
       fontSize: size,
       color: color,
-      marginBottom: 16,
+      textTransform: toUpperCase ? 'uppercase' : 'none',
     },
     style,
   ];
-  return <Text style={styles}>{children}</Text>;
+  return <Text style={textStyle as TextStyle}>{children}</Text>;
 };

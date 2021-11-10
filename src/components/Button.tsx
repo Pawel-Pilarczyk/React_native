@@ -1,5 +1,5 @@
 import React from 'react';
-import * as colors from '../utils/colors';
+import * as colors from '../constants/colors';
 
 import {Pressable, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 
@@ -30,7 +30,7 @@ export const Button = ({
 
   return (
     <Pressable onPress={onPress} style={buttonStyles}>
-      <Typography color={textColor} size={18} type={'medium'}>
+      <Typography color={textColor} size={18} type="semiBold">
         {children}
       </Typography>
     </Pressable>
