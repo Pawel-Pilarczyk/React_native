@@ -1,34 +1,38 @@
 import React from 'react';
-import {colorPicker} from '../utils/colorPicker';
+import * as colors from '../constants/colors';
 
-import {Pressable, StyleSheet, StyleProp, TextStyle} from 'react-native';
+import {Pressable, StyleSheet, StyleProp, ViewStyle} from 'react-native';
+
+import {Typography} from './index';
 
 type TButtonProps = {
   type: 'primary' | 'secondary' | 'ghost';
-  size: 'small' | 'large';
+  textColor: string;
   children: string | JSX.Element;
   onPress: () => void;
-  style?: StyleProp<TextStyle> | StyleProp<TextStyle>[];
+  style?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
 };
 
 export const Button = ({
   type,
-  size,
   children,
+  textColor,
   onPress,
   style = {},
 }: TButtonProps) => {
   const buttonStyles = [
-    {...styles.button, ...(style as Record<string, unknown>)},
-    size === 'large' ? styles.buttonLarge : styles.buttonSmall,
+    styles.button,
     type === 'primary' && styles.buttonPrimary,
     type === 'secondary' && styles.buttonSecondary,
     type === 'ghost' && styles.buttonGhost,
+    style,
   ];
 
   return (
-    <Pressable onPress={onPress} style={[buttonStyles]}>
-      {children}
+    <Pressable onPress={onPress} style={buttonStyles}>
+      <Typography color={textColor} size={18} type="semiBold">
+        {children}
+      </Typography>
     </Pressable>
   );
 };
@@ -36,26 +40,18 @@ export const Button = ({
 const styles = StyleSheet.create({
   button: {
     height: 56,
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 16,
   },
   buttonPrimary: {
-    backgroundColor: colorPicker.violet,
+    backgroundColor: colors.VIOLET,
   },
   buttonSecondary: {
-    backgroundColor: colorPicker.violetLight,
+    backgroundColor: colors.VIOLET_LIGHT,
   },
   buttonGhost: {
-    backgroundColor: 'transparent',
-    borderColor: colorPicker.violetLight,
+    borderColor: colors.VIOLET_LIGHT,
     borderWidth: 1,
-  },
-  buttonLarge: {
-    maxWidth: 343,
-  },
-  buttonSmall: {
-    maxWidth: 164,
   },
 });

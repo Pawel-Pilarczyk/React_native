@@ -1,19 +1,17 @@
 import React from 'react';
-import {capitalizeString} from '../utils/stringConversions';
-import {colorPicker} from '../utils/colorPicker';
+import {firstCharToUpperCase} from '../utils/stringConversions';
 
 import {Text, TextStyle, StyleProp} from 'react-native';
 
-type TFontType = 'Regular' | 'Medium' | 'Bold';
+type TFontType = 'regular' | 'medium' | 'semiBold' | 'bold';
 type TSize = 16 | 18 | 24 | 32 | 64;
-type TColor = 'black' | 'violet' | 'white' | 'grey';
 
 type TTypograpthyProps = {
   children: string | JSX.Element;
   type?: TFontType;
   size?: TSize;
-  color?: TColor;
-  capitalize?: boolean;
+  color?: string;
+  toUpperCase?: boolean;
   style?: StyleProp<TextStyle> | StyleProp<TextStyle>[];
 };
 
@@ -22,21 +20,19 @@ export const Typography = ({
   type,
   size = 16,
   color = 'white',
-  capitalize,
+  toUpperCase,
   style = {},
 }: TTypograpthyProps) => {
-  const fontFamily = `Inter-${type ? type : 'Regular'}`;
+  const fontFamily = `Inter-${type ? firstCharToUpperCase(type) : 'Regular'}`;
 
-  const innerContent =
-    typeof children === 'string' && capitalize
-      ? capitalizeString(children)
-      : children;
-
-  const textStyles = {
-    fontFamily: fontFamily,
-    fontSize: size,
-    color: colorPicker[color],
-    ...(style as Record<string, unknown>),
-  };
-  return <Text style={textStyles}>{innerContent}</Text>;
+  const textStyle = [
+    {
+      fontFamily: fontFamily,
+      fontSize: size,
+      color: color,
+      textTransform: toUpperCase ? 'uppercase' : 'none',
+    },
+    style,
+  ];
+  return <Text style={textStyle as TextStyle}>{children}</Text>;
 };
