@@ -1,38 +1,115 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, ScrollView, Image, StyleSheet} from 'react-native';
-import normalize from '../utils/normalize';
+import normalize, {SCREEN_WIDTH} from '../utils/normalize';
 
 import * as colors from '../constants/colors';
 
-import {Typography, Button} from '../components/';
-import {onboarding1} from '../assets/images/index';
+import {Typography, Button} from '../components';
+import {onboarding1, onboarding2, onboarding3} from '../assets/images/index';
 
 export const Onboarding = () => {
+  const [onboardingScreen, SetOnboardingScreen] = useState(1);
+
+  const handleScroll = (e: any) => {
+    if (
+      e.nativeEvent.contentOffset.x >= 0 &&
+      e.nativeEvent.contentOffset.x < normalize(290, 'width')
+    )
+      SetOnboardingScreen(1);
+    if (
+      e.nativeEvent.contentOffset.x >= normalize(290, 'width') &&
+      e.nativeEvent.contentOffset.x < normalize(580, 'width')
+    )
+      SetOnboardingScreen(2);
+    if (e.nativeEvent.contentOffset.x >= normalize(580, 'width'))
+      SetOnboardingScreen(3);
+  };
+
   return (
     <ScrollView>
       <View style={styles.wrapper}>
-        <View style={styles.indicatorWrapper}>
-          <Image source={onboarding1} style={styles.image} />
-          <Typography
-            type="bold"
-            size={32}
-            color={colors.BLACK}
-            style={styles.header}>
-            Gain total control of your money
-          </Typography>
-          <Typography
-            type="medium"
-            size={16}
-            color={colors.GREY}
-            style={styles.paragraph}>
-            Become your own money manager and make every cent count
-          </Typography>
-        </View>
+        <ScrollView
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={handleScroll}
+          contentContainerStyle={styles.swappableScreensWrapper}>
+          <View style={styles.indicatorWrapper}>
+            <Image source={onboarding1} style={styles.image} />
+            <Typography
+              type="bold"
+              size={32}
+              color={colors.BLACK}
+              style={styles.header}>
+              Gain total control of your money
+            </Typography>
+            <Typography
+              type="medium"
+              size={16}
+              color={colors.GREY}
+              style={styles.paragraph}>
+              Become your own money manager and make every cent count
+            </Typography>
+          </View>
+
+          <View style={styles.indicatorWrapper}>
+            <Image source={onboarding2} style={styles.image} />
+            <Typography
+              type="bold"
+              size={32}
+              color={colors.BLACK}
+              style={styles.header}>
+              Know where your money goes
+            </Typography>
+            <Typography
+              type="medium"
+              size={16}
+              color={colors.GREY}
+              style={styles.paragraph}>
+              Track your transaction easily, with categories and financial
+              report
+            </Typography>
+          </View>
+
+          <View style={styles.indicatorWrapper}>
+            <Image source={onboarding3} style={styles.image} />
+            <Typography
+              type="bold"
+              size={32}
+              color={colors.BLACK}
+              style={styles.header}>
+              Planning ahead
+            </Typography>
+            <Typography
+              type="medium"
+              size={16}
+              color={colors.GREY}
+              style={styles.paragraph}>
+              Setup your budget for each category so you in control
+            </Typography>
+          </View>
+        </ScrollView>
         <View style={styles.indicatorButtonsWrapper}>
-          <View style={styles.indicatorActive}></View>
-          <View style={styles.indicatorInactive}></View>
-          <View style={styles.indicatorInactive}></View>
+          <View
+            style={
+              onboardingScreen === 1
+                ? styles.indicatorActive
+                : styles.indicatorInactive
+            }></View>
+          <View
+            style={
+              onboardingScreen === 2
+                ? styles.indicatorActive
+                : styles.indicatorInactive
+            }></View>
+          <View
+            style={
+              onboardingScreen === 3
+                ? styles.indicatorActive
+                : styles.indicatorInactive
+            }></View>
         </View>
+
         <View style={styles.buttonWrapper}>
           <Button
             onPress={() => {}}
@@ -52,12 +129,16 @@ export const Onboarding = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingHorizontal: normalize(20, 'width'),
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  swappableScreensWrapper: {
+    justifyContent: 'space-around',
+  },
   indicatorWrapper: {
+    width: SCREEN_WIDTH,
+    paddingHorizontal: normalize(20, 'width'),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -98,6 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.VIOLET,
   },
   buttonWrapper: {
+    paddingHorizontal: normalize(20, 'width'),
     width: '100%',
   },
   button: {
