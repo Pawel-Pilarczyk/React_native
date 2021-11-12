@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
-import {View, ScrollView, Image, StyleSheet} from 'react-native';
-import normalize, {SCREEN_WIDTH} from '../utils/normalize';
+import React, {useState, useCallback, useMemo} from 'react';
+import {View, ScrollView, StyleSheet} from 'react-native';
 
-import * as colors from '../constants/colors';
+import normalize from '../../utils/normalize';
+import {subscreensData} from './subscreensData';
+import * as colors from '../../constants/colors';
 
-import {Typography, Button} from '../components';
-import {onboarding1, onboarding2, onboarding3} from '../assets/images/index';
+import {Button} from '../../components';
+import Subscreen from './subscreens/Subscreen';
 
 export const Onboarding = () => {
   const [onboardingScreen, SetOnboardingScreen] = useState(1);
 
-  const handleScroll = (e: any) => {
+  const handleScroll = useCallback((e: any) => {
     if (
       e.nativeEvent.contentOffset.x >= 0 &&
       e.nativeEvent.contentOffset.x < normalize(290, 'width')
@@ -23,7 +24,20 @@ export const Onboarding = () => {
       SetOnboardingScreen(2);
     if (e.nativeEvent.contentOffset.x >= normalize(580, 'width'))
       SetOnboardingScreen(3);
-  };
+  }, []);
+
+  const Subscreens = useMemo(
+    () =>
+      subscreensData.map((item, id) => (
+        <Subscreen
+          header={item.header}
+          paragraph={item.paragraph}
+          picture={item.picture}
+          key={id}
+        />
+      )),
+    [],
+  );
 
   return (
     <ScrollView>
@@ -34,60 +48,7 @@ export const Onboarding = () => {
           showsHorizontalScrollIndicator={false}
           onScroll={handleScroll}
           contentContainerStyle={styles.swappableScreensWrapper}>
-          <View style={styles.indicatorWrapper}>
-            <Image source={onboarding1} style={styles.image} />
-            <Typography
-              type="bold"
-              size={32}
-              color={colors.BLACK}
-              style={styles.header}>
-              Gain total control of your money
-            </Typography>
-            <Typography
-              type="medium"
-              size={16}
-              color={colors.GREY}
-              style={styles.paragraph}>
-              Become your own money manager and make every cent count
-            </Typography>
-          </View>
-
-          <View style={styles.indicatorWrapper}>
-            <Image source={onboarding2} style={styles.image} />
-            <Typography
-              type="bold"
-              size={32}
-              color={colors.BLACK}
-              style={styles.header}>
-              Know where your money goes
-            </Typography>
-            <Typography
-              type="medium"
-              size={16}
-              color={colors.GREY}
-              style={styles.paragraph}>
-              Track your transaction easily, with categories and financial
-              report
-            </Typography>
-          </View>
-
-          <View style={styles.indicatorWrapper}>
-            <Image source={onboarding3} style={styles.image} />
-            <Typography
-              type="bold"
-              size={32}
-              color={colors.BLACK}
-              style={styles.header}>
-              Planning ahead
-            </Typography>
-            <Typography
-              type="medium"
-              size={16}
-              color={colors.GREY}
-              style={styles.paragraph}>
-              Setup your budget for each category so you in control
-            </Typography>
-          </View>
+          {Subscreens}
         </ScrollView>
         <View style={styles.indicatorButtonsWrapper}>
           <View
@@ -135,28 +96,6 @@ const styles = StyleSheet.create({
   },
   swappableScreensWrapper: {
     justifyContent: 'space-around',
-  },
-  indicatorWrapper: {
-    width: SCREEN_WIDTH,
-    paddingHorizontal: normalize(20, 'width'),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: normalize(251, 'height'),
-    height: normalize(251, 'height'),
-    alignContent: 'center',
-    justifyContent: 'center',
-    marginBottom: normalize(62, 'height'),
-    marginTop: normalize(72, 'height'),
-  },
-  header: {
-    marginBottom: normalize(17, 'height'),
-    textAlign: 'center',
-  },
-  paragraph: {
-    marginBottom: normalize(35, 'height'),
-    textAlign: 'center',
   },
   indicatorButtonsWrapper: {
     flexDirection: 'row',
