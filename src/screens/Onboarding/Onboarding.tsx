@@ -57,8 +57,7 @@ export const Onboarding = () => {
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        onScroll={handleScroll}
-        contentContainerStyle={styles.swappableScreensWrapper}>
+        onScroll={handleScroll}>
         {slides}
       </ScrollView>
       <View style={styles.indicatorButtonsWrapper}>{indicatorDots}</View>
@@ -83,9 +82,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     paddingBottom: normalize(20, 'width'),
-  },
-  swappableScreensWrapper: {
-    justifyContent: 'space-around',
   },
   indicatorButtonsWrapper: {
     flexDirection: 'row',
