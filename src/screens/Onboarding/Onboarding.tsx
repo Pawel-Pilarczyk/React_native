@@ -1,88 +1,78 @@
-import React, {useState, useCallback, useMemo} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from 'react-native';
 
 import normalize from '../../utils/normalize';
-import {subscreensData} from './subscreensData';
+import {slidesData} from './slidesData';
 import * as colors from '../../constants/colors';
 
 import {Button} from '../../components';
-import Subscreen from './subscreens/Subscreen';
+import Slide from '../../components/Slide';
 
 export const Onboarding = () => {
-  const [onboardingScreen, SetOnboardingScreen] = useState(1);
+  const [activeSlide, setActiveSlide] = useState(0);
 
-  const handleScroll = useCallback((e: any) => {
-    if (
-      e.nativeEvent.contentOffset.x >= 0 &&
-      e.nativeEvent.contentOffset.x < normalize(290, 'width')
-    )
-      SetOnboardingScreen(1);
-    if (
-      e.nativeEvent.contentOffset.x >= normalize(290, 'width') &&
-      e.nativeEvent.contentOffset.x < normalize(580, 'width')
-    )
-      SetOnboardingScreen(2);
-    if (e.nativeEvent.contentOffset.x >= normalize(580, 'width'))
-      SetOnboardingScreen(3);
-  }, []);
+  const handleScroll = ({
+    nativeEvent: {
+      contentOffset: {x},
+      contentSize: {width},
+    },
+  }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const interval = width / slidesData.length;
+    const currentSlide = Math.round(x / interval);
+    if (currentSlide !== activeSlide) {
+      setActiveSlide(currentSlide);
+    }
+  };
 
-  const Subscreens = useMemo(
-    () =>
-      subscreensData.map((item, id) => (
-        <Subscreen
-          header={item.header}
-          paragraph={item.paragraph}
-          picture={item.picture}
-          key={id}
-        />
-      )),
-    [],
-  );
+  const slides = slidesData.map(item => (
+    <Slide
+      header={item.header}
+      paragraph={item.paragraph}
+      picture={item.picture}
+      id={item.id}
+      key={item.id}
+    />
+  ));
 
+  const indicatorDots = slidesData.map(item => {
+    return (
+      <View
+        style={
+          activeSlide === item.id
+            ? styles.indicatorActive
+            : styles.indicatorInactive
+        }
+        key={`dot${item.id}`}></View>
+    );
+  });
   return (
-    <ScrollView>
-      <View style={styles.wrapper}>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          onScroll={handleScroll}
-          contentContainerStyle={styles.swappableScreensWrapper}>
-          {Subscreens}
-        </ScrollView>
-        <View style={styles.indicatorButtonsWrapper}>
-          <View
-            style={
-              onboardingScreen === 1
-                ? styles.indicatorActive
-                : styles.indicatorInactive
-            }></View>
-          <View
-            style={
-              onboardingScreen === 2
-                ? styles.indicatorActive
-                : styles.indicatorInactive
-            }></View>
-          <View
-            style={
-              onboardingScreen === 3
-                ? styles.indicatorActive
-                : styles.indicatorInactive
-            }></View>
-        </View>
-
-        <View style={styles.buttonWrapper}>
-          <Button
-            onPress={() => {}}
-            textColor={colors.WHITE}
-            type="primary"
-            style={styles.button}>
-            Sign Up
-          </Button>
-          <Button onPress={() => {}} textColor={colors.VIOLET} type="secondary">
-            Login
-          </Button>
-        </View>
+    <ScrollView contentContainerStyle={styles.wrapper}>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={handleScroll}
+        contentContainerStyle={styles.swappableScreensWrapper}>
+        {slides}
+      </ScrollView>
+      <View style={styles.indicatorButtonsWrapper}>{indicatorDots}</View>
+      <View style={styles.buttonWrapper}>
+        <Button
+          onPress={() => {}}
+          textColor={colors.WHITE}
+          type="primary"
+          style={styles.button}>
+          Sign Up
+        </Button>
+        <Button onPress={() => {}} textColor={colors.VIOLET} type="secondary">
+          Login
+        </Button>
       </View>
     </ScrollView>
   );
@@ -90,9 +80,9 @@ export const Onboarding = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingBottom: normalize(20, 'width'),
   },
   swappableScreensWrapper: {
     justifyContent: 'space-around',
@@ -120,6 +110,7 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     paddingHorizontal: normalize(20, 'width'),
     width: '100%',
+    marginTop: 'auto',
   },
   button: {
     marginBottom: normalize(16, 'height'),

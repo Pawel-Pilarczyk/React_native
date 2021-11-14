@@ -1,19 +1,20 @@
-import {normalize} from '../../../utils';
-import {SCREEN_WIDTH} from '../../../utils/normalize';
+import {normalize} from '../utils';
+import {SCREEN_WIDTH} from '../constants/dimensions';
 
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
-import {Typography} from '../../../components';
+import {Typography} from '.';
 
-import * as colors from '../../../constants/colors';
+import * as colors from '../constants/colors';
 
-export interface SubscreenProps {
+export interface SlieProps {
+  id: number;
   header: string;
   paragraph: string;
   picture: any;
 }
 
-const Subscreen: React.FC<SubscreenProps> = ({header, paragraph, picture}) => {
+const Slide = ({header, paragraph, picture}: SlieProps) => {
   return (
     <View style={styles.indicatorWrapper}>
       <Image source={picture} style={styles.image} />
@@ -55,9 +56,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   paragraph: {
-    marginBottom: normalize(35, 'height'),
     textAlign: 'center',
   },
 });
 
-export default Subscreen;
+export default Slide;
