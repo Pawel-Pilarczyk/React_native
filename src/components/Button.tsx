@@ -1,5 +1,6 @@
 import React from 'react';
 import * as colors from '../constants/colors';
+import {normalize} from '../utils';
 
 import {Pressable, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 
@@ -39,10 +40,10 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    height: 56,
+    height: normalize(56, 'height'),
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 16,
+    borderRadius: normalize(16, 'width'),
   },
   buttonPrimary: {
     backgroundColor: colors.VIOLET,
