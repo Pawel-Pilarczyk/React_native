@@ -6,15 +6,16 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {slidesData} from './slidesData';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
 
-import Slide from '@components/Slide';
-import {Button} from '@components/index';
+import {Button, Slide} from '@components/index';
 
-export const Onboarding = () => {
+export const Onboarding = ({navigation}) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const handleScroll = ({
@@ -61,7 +62,7 @@ export const Onboarding = () => {
       <View style={styles.indicatorButtonsWrapper}>{indicatorDots}</View>
       <View style={styles.buttonWrapper}>
         <Button
-          onPress={() => {}}
+          onPress={() => navigation.navigate('SingUp')}
           textColor={colors.WHITE}
           type="primary"
           style={styles.button}>
