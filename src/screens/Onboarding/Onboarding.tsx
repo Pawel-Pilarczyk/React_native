@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 
 import {slidesData} from './slidesData';
-import {normalize} from '@utils/normalize';
+import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
 
-import {Button, Slide, Input} from '@components/index';
+import Slide from '@components/Slide';
+import {Button} from '@components/index';
 
 export const Onboarding = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -29,16 +30,6 @@ export const Onboarding = () => {
     }
   };
 
-  const slides = slidesData.map(item => (
-    <Slide
-      header={item.header}
-      paragraph={item.paragraph}
-      picture={item.picture}
-      id={item.id}
-      key={item.id}
-    />
-  ));
-
   const indicatorDots = slidesData.map(item => {
     return (
       <View
@@ -52,13 +43,20 @@ export const Onboarding = () => {
   });
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
-      <Input placeholder="hello" type="password" />
       <ScrollView
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}>
-        {slides}
+        {slidesData.map(item => (
+          <Slide
+            header={item.header}
+            paragraph={item.paragraph}
+            picture={item.picture}
+            id={item.id}
+            key={item.id}
+          />
+        ))}
       </ScrollView>
       <View style={styles.indicatorButtonsWrapper}>{indicatorDots}</View>
       <View style={styles.buttonWrapper}>
