@@ -4,10 +4,15 @@ import {firstCharToUpperCase, normalize} from '../utils/';
 import {Text, TextStyle, StyleProp} from 'react-native';
 
 type TFontType = 'regular' | 'medium' | 'semiBold' | 'bold';
-type TSize = 16 | 18 | 24 | 32 | 64;
+type TSize = 14 | 16 | 18 | 24 | 32 | 64;
 
 type TTypograpthyProps = {
-  children: string | JSX.Element;
+  children:
+    | string
+    | JSX.Element
+    | string[]
+    | JSX.Element[]
+    | [string, JSX.Element];
   type?: TFontType;
   size?: TSize;
   color?: string;
