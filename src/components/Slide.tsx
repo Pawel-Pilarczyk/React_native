@@ -7,14 +7,14 @@ import {Typography} from '.';
 
 import * as colors from '../constants/colors';
 
-export interface SlieProps {
+export interface SlideProps {
   id: number;
   header: string;
   paragraph: string;
   picture: any;
 }
 
-const Slide = ({header, paragraph, picture}: SlieProps) => {
+const Slide = ({header, paragraph, picture}: SlideProps) => {
   return (
     <View style={styles.indicatorWrapper}>
       <Image source={picture} style={styles.image} />

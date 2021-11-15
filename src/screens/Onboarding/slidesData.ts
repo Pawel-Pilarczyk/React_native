@@ -1,7 +1,7 @@
-import {SubscreenProps} from '../../components/Slide';
+import {SlideProps} from '../../components/Slide';
 import {onboarding1, onboarding2, onboarding3} from '../../assets/images/index';
 
-export const slidesData: SubscreenProps[] = [
+export const slidesData: SlideProps[] = [
   {
     id: 0,
     header: 'Gain total control of your money',

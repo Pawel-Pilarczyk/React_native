@@ -7,12 +7,14 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 
-import normalize from '../../utils/normalize';
 import {slidesData} from './slidesData';
-import * as colors from '../../constants/colors';
+//@ts-ignore
+import normalize from '@utils/normalize';
+//@ts-ignore
+import * as colors from '@constants/colors';
 
-import {Button} from '../../components';
-import Slide from '../../components/Slide';
+//@ts-ignore
+import {Button, Slide} from '@components';
 
 export const Onboarding = () => {
   const [activeSlide, setActiveSlide] = useState(0);
