@@ -35,7 +35,7 @@ const Input = ({
     <View style={styles.wrapper}>
       <TextInput
         placeholder={placeholder}
-        secureTextEntry={type === 'password' && !passwordVisible}
+        secureTextEntry={type === 'password' && passwordVisible}
         style={styles.input}
         {...defaultProps}
       />

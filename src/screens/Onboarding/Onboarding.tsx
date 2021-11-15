@@ -8,13 +8,10 @@ import {
 } from 'react-native';
 
 import {slidesData} from './slidesData';
-//@ts-ignore
-import normalize from '@utils/normalize';
-//@ts-ignore
+import {normalize} from '@utils/normalize';
 import * as colors from '@constants/colors';
 
-//@ts-ignore
-import {Button, Slide} from '@components';
+import {Button, Slide, Input} from '@components/index';
 
 export const Onboarding = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -55,6 +52,7 @@ export const Onboarding = () => {
   });
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
+      <Input placeholder="hello" type="password" />
       <ScrollView
         horizontal
         pagingEnabled
