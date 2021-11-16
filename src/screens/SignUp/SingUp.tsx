@@ -1,25 +1,101 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, View, Pressable, StyleSheet} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
 
 import {TSignUpProps} from 'navigation/navigation.types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
+import {emailPattern} from '@constants/validators';
 import {Input, Button, Typography, Checkbox} from '@components/index';
 
+type TFormFields = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 const SignUp = ({navigation}: TSignUpProps) => {
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
   const navigateToLoginHandler = () => {
     navigation.navigate('Login');
   };
 
+  const handleCheckbox = (value: boolean) => {
+    setCheckboxChecked(value);
+  };
+
+  const handleOnSubmit = ({email, name, password}: TFormFields) =>
+    checkboxChecked && {email, name, password};
+
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
       <View style={styles.inputsWrapper}>
-        <Input placeholder="Name" type="text" />
-        <Input placeholder="Email" type="text" />
-        <Input placeholder="Password" type="password" />
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Field Required'},
+          }}
+          render={({field: {onChange, onBlur, value}}) => (
+            <Input
+              placeholder="Name"
+              type="text"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              error={errors?.name?.message}
+            />
+          )}
+          name="name"
+        />
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Field Required'},
+            pattern: {value: emailPattern, message: 'Incorrect email'},
+          }}
+          render={({field: {onChange, onBlur, value}}) => (
+            <Input
+              placeholder="email"
+              type="text"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              error={errors?.email?.message}
+            />
+          )}
+          name="email"
+        />
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Field Required'},
+            minLength: {value: 6, message: 'Password to short'},
+          }}
+          render={({field: {onChange, onBlur, value}}) => (
+            <Input
+              placeholder="password"
+              type="password"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              error={errors?.password?.message}
+            />
+          )}
+          name="password"
+        />
       </View>
       <View style={styles.termsWrapper}>
-        <Checkbox style={{marginRight: normalize(14, 'width')}} />
+        <Checkbox
+          style={{marginRight: normalize(14, 'width')}}
+          handleCheck={handleCheckbox}
+        />
         <Typography color={colors.BLACK} size={14} type={'semiBold'}>
           By signing up, you agree to the
           <Typography
@@ -32,7 +108,10 @@ const SignUp = ({navigation}: TSignUpProps) => {
         </Typography>
       </View>
       <View style={styles.buttonsWrapper}>
-        <Button onPress={() => {}} textColor={colors.WHITE} type="primary">
+        <Button
+          onPress={handleSubmit(handleOnSubmit)}
+          textColor={colors.WHITE}
+          type="primary">
           Sign up
         </Button>
         <Typography

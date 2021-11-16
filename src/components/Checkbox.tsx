@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -13,16 +13,20 @@ import {checkMark} from '@assets/images';
 
 type TCheckboxProps = {
   style?: ViewStyle;
-  handleCheck?: () => void;
+  handleCheck?: (value: boolean) => void;
 };
 
 const Checkbox = ({style, handleCheck}: TCheckboxProps & PressableProps) => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const toggleCheckCheckbox = () => {
     setChecked(!checked);
-    handleCheck && handleCheck();
   };
+
+  useEffect(() => {
+    handleCheck && handleCheck(checked);
+  }, [checked]);
+
   return (
     <Pressable
       style={[styles.wrapper, checked ? styles.checked : {}, style]}
