@@ -3,5 +3,6 @@ import onboarding2 from './onboarding/onboarding2.png';
 import onboarding3 from './onboarding/onboarding3.png';
 import eye from './eye.png';
 import eyeClosed from './eyeClosed.png';
+import checkMark from './checkMark.png';
 
-export {onboarding1, onboarding2, onboarding3, eye, eyeClosed};
+export {onboarding1, onboarding2, onboarding3, eye, eyeClosed, checkMark};

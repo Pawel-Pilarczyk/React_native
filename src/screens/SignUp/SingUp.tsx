@@ -4,7 +4,7 @@ import {ScrollView, View, Pressable, StyleSheet} from 'react-native';
 import {TSignUpProps} from 'navigation/navigation.types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
-import {Input, Button, Typography} from '@components/index';
+import {Input, Button, Typography, Checkbox} from '@components/index';
 
 const SignUp = ({navigation}: TSignUpProps) => {
   const navigateToLoginHandler = () => {
@@ -19,6 +19,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
         <Input placeholder="Password" type="password" />
       </View>
       <View style={styles.termsWrapper}>
+        <Checkbox style={{marginRight: normalize(14, 'width')}} />
         <Typography color={colors.BLACK} size={14} type={'semiBold'}>
           By signing up, you agree to the
           <Typography
@@ -77,7 +78,8 @@ const styles = StyleSheet.create({
   termsWrapper: {
     marginTop: normalize(17, 'height'),
     flexDirection: 'row',
-    textAlign: 'center',
+    alignItems: 'center',
+    paddingHorizontal: normalize(20, 'width'),
   },
   buttonsWrapper: {
     width: '100%',
