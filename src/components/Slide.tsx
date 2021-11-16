@@ -3,53 +3,49 @@ import {SCREEN_WIDTH} from '../constants/dimensions';
 
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
-import {Typography} from '.';
+import {Typography} from './';
 
 import * as colors from '../constants/colors';
 
-export interface SlieProps {
+export type TSlideProps = {
   id: number;
   header: string;
   paragraph: string;
   picture: any;
-}
-
-const Slide = ({header, paragraph, picture}: SlieProps) => {
-  return (
-    <View style={styles.indicatorWrapper}>
-      <Image source={picture} style={styles.image} />
-      <Typography
-        type="bold"
-        size={32}
-        color={colors.BLACK}
-        style={styles.header}>
-        {header}
-      </Typography>
-      <Typography
-        type="medium"
-        size={16}
-        color={colors.GREY}
-        style={styles.paragraph}>
-        {paragraph}
-      </Typography>
-    </View>
-  );
 };
 
+const Slide = ({header, paragraph, picture}: TSlideProps) => (
+  <View style={styles.wrapper}>
+    <Image source={picture} style={styles.image} />
+    <Typography
+      type="bold"
+      size={32}
+      color={colors.BLACK}
+      style={styles.header}>
+      {header}
+    </Typography>
+    <Typography
+      type="medium"
+      size={16}
+      color={colors.GREY}
+      style={styles.paragraph}>
+      {paragraph}
+    </Typography>
+  </View>
+);
+
 const styles = StyleSheet.create({
-  indicatorWrapper: {
+  wrapper: {
     width: SCREEN_WIDTH,
     paddingHorizontal: normalize(20, 'width'),
     alignItems: 'center',
     justifyContent: 'center',
   },
   image: {
-    width: normalize(251, 'height'),
-    height: normalize(251, 'height'),
-    alignContent: 'center',
-    justifyContent: 'center',
-    marginBottom: normalize(62, 'height'),
-    marginTop: normalize(72, 'height'),
+    width: normalize(312, 'height'),
+    height: normalize(312, 'height'),
+    marginBottom: normalize(40, 'height'),
+    marginTop: normalize(32, 'height'),
   },
   header: {
     marginBottom: normalize(17, 'height'),

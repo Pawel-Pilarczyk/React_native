@@ -7,14 +7,13 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 
-import normalize from '../../utils/normalize';
+import {TOnboardingProps} from 'navigation/navigation.types';
 import {slidesData} from './slidesData';
-import * as colors from '../../constants/colors';
+import {normalize} from '@utils/index';
+import * as colors from '@constants/colors';
+import {Button, Slide} from '@components/index';
 
-import {Button} from '../../components';
-import Slide from '../../components/Slide';
-
-export const Onboarding = () => {
+export const Onboarding = ({navigation}: TOnboardingProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const handleScroll = ({
@@ -30,27 +29,8 @@ export const Onboarding = () => {
     }
   };
 
-  const slides = slidesData.map(item => (
-    <Slide
-      header={item.header}
-      paragraph={item.paragraph}
-      picture={item.picture}
-      id={item.id}
-      key={item.id}
-    />
-  ));
+  const handleNavigation = () => navigation.navigate('SignUp');
 
-  const indicatorDots = slidesData.map(item => {
-    return (
-      <View
-        style={
-          activeSlide === item.id
-            ? styles.indicatorActive
-            : styles.indicatorInactive
-        }
-        key={`dot${item.id}`}></View>
-    );
-  });
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
       <ScrollView
@@ -58,12 +38,33 @@ export const Onboarding = () => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}>
-        {slides}
+        {slidesData.map(item => (
+          <Slide
+            header={item.header}
+            paragraph={item.paragraph}
+            picture={item.picture}
+            id={item.id}
+            key={item.id}
+          />
+        ))}
       </ScrollView>
-      <View style={styles.indicatorButtonsWrapper}>{indicatorDots}</View>
+      <View style={styles.indicatorButtonsWrapper}>
+        {slidesData.map(item => {
+          return (
+            <View
+              style={
+                activeSlide === item.id
+                  ? styles.indicatorActive
+                  : styles.indicatorInactive
+              }
+              key={item.id}
+            />
+          );
+        })}
+      </View>
       <View style={styles.buttonWrapper}>
         <Button
-          onPress={() => {}}
+          onPress={handleNavigation}
           textColor={colors.WHITE}
           type="primary"
           style={styles.button}>
@@ -85,8 +86,6 @@ const styles = StyleSheet.create({
   },
   indicatorButtonsWrapper: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: normalize(37, 'height'),
   },
   indicatorInactive: {

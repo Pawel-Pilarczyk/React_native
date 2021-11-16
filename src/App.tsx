@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Onboarding} from './screens/Onboarding/Onboarding';
+import Navigation from './navigation';
 
-const App = () => {
-  return <Onboarding />;
-};
+const App = () => <Navigation />;
 
 export default App;
+
+// add errors message
