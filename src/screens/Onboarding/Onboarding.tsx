@@ -7,13 +7,13 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 
+import {TOnboardingProps} from 'navigation/navigation.types';
 import {slidesData} from './slidesData';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
-
 import {Button, Slide} from '@components/index';
 
-export const Onboarding = ({navigation}) => {
+export const Onboarding = ({navigation}: TOnboardingProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const handleScroll = ({
@@ -29,17 +29,8 @@ export const Onboarding = ({navigation}) => {
     }
   };
 
-  const indicatorDots = slidesData.map(item => {
-    return (
-      <View
-        style={
-          activeSlide === item.id
-            ? styles.indicatorActive
-            : styles.indicatorInactive
-        }
-        key={`dot${item.id}`}></View>
-    );
-  });
+  const handleNavigation = () => navigation.navigate('SignUp');
+
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
       <ScrollView
@@ -57,10 +48,23 @@ export const Onboarding = ({navigation}) => {
           />
         ))}
       </ScrollView>
-      <View style={styles.indicatorButtonsWrapper}>{indicatorDots}</View>
+      <View style={styles.indicatorButtonsWrapper}>
+        {slidesData.map(item => {
+          return (
+            <View
+              style={
+                activeSlide === item.id
+                  ? styles.indicatorActive
+                  : styles.indicatorInactive
+              }
+              key={item.id}
+            />
+          );
+        })}
+      </View>
       <View style={styles.buttonWrapper}>
         <Button
-          onPress={() => navigation.navigate('SingUp')}
+          onPress={handleNavigation}
           textColor={colors.WHITE}
           type="primary"
           style={styles.button}>
@@ -82,8 +86,6 @@ const styles = StyleSheet.create({
   },
   indicatorButtonsWrapper: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: normalize(37, 'height'),
   },
   indicatorInactive: {

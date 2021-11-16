@@ -1,7 +1,7 @@
 import React from 'react';
-import {firstCharToUpperCase, normalize} from '../utils/';
+import {Text, TextStyle, StyleProp, TextProps} from 'react-native';
 
-import {Text, TextStyle, StyleProp} from 'react-native';
+import {firstCharToUpperCase, normalize} from '@utils/index';
 
 type TFontType = 'regular' | 'medium' | 'semiBold' | 'bold';
 type TSize = 14 | 16 | 18 | 24 | 32 | 64;
@@ -27,7 +27,8 @@ export const Typography = ({
   color = 'white',
   toUpperCase,
   style = {},
-}: TTypograpthyProps) => {
+  ...defaultProps
+}: TTypograpthyProps & TextProps) => {
   const fontFamily = `Inter-${type ? firstCharToUpperCase(type) : 'Regular'}`;
 
   return (
@@ -40,7 +41,8 @@ export const Typography = ({
           textTransform: toUpperCase ? 'uppercase' : 'none',
         },
         style,
-      ]}>
+      ]}
+      {...defaultProps}>
       {children}
     </Text>
   );

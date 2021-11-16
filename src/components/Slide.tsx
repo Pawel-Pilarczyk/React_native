@@ -7,14 +7,14 @@ import {Typography} from './';
 
 import * as colors from '../constants/colors';
 
-export interface SlideProps {
+export type TSlideProps = {
   id: number;
   header: string;
   paragraph: string;
   picture: any;
-}
+};
 
-const Slide = ({header, paragraph, picture}: SlideProps): JSX.Element => (
+const Slide = ({header, paragraph, picture}: TSlideProps) => (
   <View style={styles.wrapper}>
     <Image source={picture} style={styles.image} />
     <Typography
@@ -44,8 +44,6 @@ const styles = StyleSheet.create({
   image: {
     width: normalize(312, 'height'),
     height: normalize(312, 'height'),
-    alignContent: 'center',
-    justifyContent: 'center',
     marginBottom: normalize(40, 'height'),
     marginTop: normalize(32, 'height'),
   },

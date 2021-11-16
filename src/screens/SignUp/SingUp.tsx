@@ -1,39 +1,26 @@
 import React from 'react';
 import {ScrollView, View, Pressable, StyleSheet} from 'react-native';
 
+import {TSignUpProps} from 'navigation/navigation.types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
-
 import {Input, Button, Typography} from '@components/index';
 
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+const SignUp = ({navigation}: TSignUpProps) => {
+  const navigateToLoginHandler = () => {
+    navigation.navigate('Login');
+  };
 
-type RootStackParamList = {
-  Home: undefined;
-  Profile: {userId: string};
-  Feed: {sort: 'latest' | 'top'} | undefined;
-  Login: undefined;
-};
-
-type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
-
-const SignUp = ({navigation}: Props) => {
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
       <View style={styles.inputsWrapper}>
-        <Input placeholder="Name" type="text" style={styles.input} />
-        <Input placeholder="Email" type="email" style={styles.input} />
-        <Input placeholder="Password" type="password" style={styles.input} />
+        <Input placeholder="Name" type="text" />
+        <Input placeholder="Email" type="text" />
+        <Input placeholder="Password" type="password" />
       </View>
       <View style={styles.termsWrapper}>
-        <Typography
-          color={colors.BLACK}
-          size={14}
-          type={'semiBold'}
-          style={{flexShrink: 1}}>
-          By signing up, you agree to the Terms of Service and Privacy Policy
-        </Typography>
-        {/* <Pressable>
+        <Typography color={colors.BLACK} size={14} type={'semiBold'}>
+          By signing up, you agree to the
           <Typography
             color={colors.VIOLET}
             size={14}
@@ -41,7 +28,7 @@ const SignUp = ({navigation}: Props) => {
             style={styles.linkStyle}>
             Terms of Service and Privacy Policy
           </Typography>
-        </Pressable> */}
+        </Typography>
       </View>
       <View style={styles.buttonsWrapper}>
         <Button onPress={() => {}} textColor={colors.WHITE} type="primary">
@@ -62,7 +49,7 @@ const SignUp = ({navigation}: Props) => {
         <Typography color={colors.GREY} size={16} type="regular">
           Already have an account?
         </Typography>
-        <Pressable onPress={() => navigation.navigate('Login')}>
+        <Pressable onPress={navigateToLoginHandler}>
           <Typography
             color={colors.VIOLET}
             size={16}
@@ -87,9 +74,6 @@ const styles = StyleSheet.create({
     marginTop: normalize(56, 'height'),
     marginBottom: normalize(17, 'height'),
   },
-  input: {
-    marginTop: normalize(24, 'height'),
-  },
   termsWrapper: {
     marginTop: normalize(17, 'height'),
     flexDirection: 'row',
@@ -103,7 +87,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   linkStyle: {
-    paddingLeft: 2,
     textDecorationLine: 'underline',
     textDecorationColor: colors.VIOLET,
     flexShrink: 1,
