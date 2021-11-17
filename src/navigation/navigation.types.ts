@@ -12,3 +12,5 @@ export type TOnboardingProps = NativeStackScreenProps<
 >;
 
 export type TSignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
+
+export type TLogin = NativeStackScreenProps<RootStackParamList, 'Login'>;
