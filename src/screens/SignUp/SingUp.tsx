@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-
-import {TSignUpProps} from 'navigation/navigation.types';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from 'navigation/types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
 import {emailPattern} from '@constants/validators';
@@ -13,38 +13,25 @@ type TFormFields = {
   name: string;
   email: string;
   password: string;
+  terms: boolean;
 };
 
-const SignUp = ({navigation}: TSignUpProps) => {
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [errorCheckbox, setErrorCheckbox] = useState(false);
+export type TSignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
+const SignUp = ({navigation}: TSignUpProps) => {
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm();
+  } = useForm<TFormFields>();
 
   const navigateToLoginHandler = () => {
     navigation.navigate('Login');
   };
 
-  const handleCheckbox = (value: boolean) => {
-    setCheckboxChecked(value);
-  };
-
-  const handleOnSubmit = ({email, name, password}: TFormFields) => {
-    if (checkboxChecked) {
-      setErrorCheckbox(false);
-      return {email, name, password};
-    } else {
-      setErrorCheckbox(true);
-    }
-  };
-
-  useEffect(() => {
-    checkboxChecked && setErrorCheckbox && setErrorCheckbox(false);
-  }, [checkboxChecked]);
+  const handleOnSubmit = handleSubmit(({email, name, password}) => {
+    return {email, name, password};
+  });
 
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
@@ -61,7 +48,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              error={errors?.name?.message}
+              error={errors.name?.message}
             />
           )}
           name="name"
@@ -79,7 +66,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              error={errors?.email?.message}
+              error={errors.email?.message}
             />
           )}
           name="email"
@@ -100,17 +87,28 @@ const SignUp = ({navigation}: TSignUpProps) => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              error={errors?.password?.message}
+              error={errors.password?.message}
             />
           )}
           name="password"
         />
       </View>
       <View style={styles.termsWrapper}>
-        <Checkbox
-          style={{marginRight: normalize(14, 'width')}}
-          handleCheck={handleCheckbox}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({field: {onChange, value}}) => (
+            <Checkbox
+              style={{marginRight: normalize(14, 'width')}}
+              onPress={() => onChange(!value)}
+              value={value}
+            />
+          )}
+          name="terms"
         />
+
         <Typography color={colors.BLACK} size={14} type={'semiBold'}>
           By signing up, you agree to the
           <Typography
@@ -121,7 +119,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
             Terms of Service and Privacy Policy
           </Typography>
         </Typography>
-        {errorCheckbox && (
+        {errors.terms && (
           <Typography color={colors.RED} style={styles.termsError} type="bold">
             Accepting Terms and conditions required
           </Typography>
@@ -129,7 +127,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
       </View>
       <View style={styles.buttonsWrapper}>
         <Button
-          onPress={handleSubmit(handleOnSubmit)}
+          onPress={handleOnSubmit}
           textColor={colors.WHITE}
           type="primary">
           Sign up

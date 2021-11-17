@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from './navigation.types';
+import {RootStackParamList} from './types';
 import {Onboarding, SignUp, Login} from '@screens/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -20,7 +20,7 @@ const Navigation = () => {
           component={SignUp}
           options={{
             headerTitleAlign: 'center',
-            headerTitle: 'Sign up',
+            title: 'Sign up',
           }}
         />
         <RootStack.Screen name="Login" component={Login} />

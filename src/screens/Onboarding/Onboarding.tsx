@@ -7,11 +7,18 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 
-import {TOnboardingProps} from 'navigation/navigation.types';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+
+import {RootStackParamList} from 'navigation/types';
 import {slidesData} from './slidesData';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
 import {Button, Slide} from '@components/index';
+
+export type TOnboardingProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Onboarding'
+>;
 
 export const Onboarding = ({navigation}: TOnboardingProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
