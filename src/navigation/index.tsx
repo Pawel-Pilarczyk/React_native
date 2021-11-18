@@ -23,7 +23,14 @@ const Navigation = () => {
             title: 'Sign up',
           }}
         />
-        <RootStack.Screen name="Login" component={Login} />
+        <RootStack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerTitleAlign: 'center',
+            title: 'Login',
+          }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
