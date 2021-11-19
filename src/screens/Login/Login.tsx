@@ -23,6 +23,7 @@ const Login = ({navigation}: TLoginProps) => {
   } = useForm<TFormFields>();
 
   const handleLogin = handleSubmit(({password, login}) => {
+    navigation.navigate('SetUpPIN');
     return {password, login};
   });
 

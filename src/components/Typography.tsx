@@ -4,7 +4,7 @@ import {Text, TextStyle, StyleProp, TextProps} from 'react-native';
 import {firstCharToUpperCase, normalize} from '@utils/index';
 
 type TFontType = 'regular' | 'medium' | 'semiBold' | 'bold';
-type TSize = 14 | 16 | 18 | 24 | 32 | 64;
+type TSize = 14 | 16 | 18 | 24 | 32 | 48 | 64;
 
 type TTypograpthyProps = {
   children:

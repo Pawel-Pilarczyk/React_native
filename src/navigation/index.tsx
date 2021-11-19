@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
-import {Onboarding, SignUp, Login} from '@screens/index';
+import {Onboarding, SignUp, Login, PINsetup} from '@screens/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -30,6 +30,11 @@ const Navigation = () => {
             headerTitleAlign: 'center',
             title: 'Login',
           }}
+        />
+        <RootStack.Screen
+          name="SetUpPIN"
+          component={PINsetup}
+          options={{headerShown: false}}
         />
       </RootStack.Navigator>
     </NavigationContainer>
