@@ -39,6 +39,13 @@ const PINsetup = ({navigation}: TPINsetupProps) => {
     ['7', '8', '9'],
   ];
 
+  const PINCirclesData = [
+    PIN.length >= 1,
+    PIN.length >= 2,
+    PIN.length >= 3,
+    PIN.length >= 4,
+  ];
+
   return (
     <View style={styles.wrapper}>
       <Typography
@@ -49,10 +56,9 @@ const PINsetup = ({navigation}: TPINsetupProps) => {
         Let’s setup your PIN
       </Typography>
       <View style={styles.PINWrapper}>
-        <PINCircle active={PIN.length >= 1} />
-        <PINCircle active={PIN.length >= 2} />
-        <PINCircle active={PIN.length >= 3} />
-        <PINCircle active={PIN.length >= 4} />
+        {PINCirclesData.map((active, id) => (
+          <PINCircle active={active} key={id} />
+        ))}
       </View>
       <View style={styles.buttonsSectionWrapper}>
         {rows.map((row, id) => (
