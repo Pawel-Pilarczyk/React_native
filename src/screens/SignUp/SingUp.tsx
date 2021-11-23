@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import React, {ReactNode, useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DatePicker from 'react-native-date-picker';
@@ -9,7 +9,13 @@ import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
 import {SCREEN_WIDTH} from '@constants/index';
 import {emailPattern} from '@constants/validators';
-import {Input, Button, Typography, Checkbox} from '@components/index';
+import {
+  Input,
+  Button,
+  Typography,
+  Checkbox,
+  ErrorMessage,
+} from '@components/index';
 import {googleIcon} from '@assets/images';
 
 type TFormFields = {
@@ -18,12 +24,12 @@ type TFormFields = {
   password: string;
   terms: boolean;
   gender: string;
+  dateOfBirth: Date;
 };
 
 export type TSignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
 const SignUp = ({navigation}: TSignUpProps) => {
-  const [date, setDate] = useState(new Date());
   const [openDate, setOpenDate] = useState(false);
 
   const [open, setOpen] = useState(false);
@@ -34,6 +40,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: {errors},
   } = useForm<TFormFields>();
 
@@ -41,10 +48,12 @@ const SignUp = ({navigation}: TSignUpProps) => {
     navigation.navigate('Login');
   };
 
-  const handleOnSubmit = handleSubmit(({email, name, password, gender}) => {
-    console.log(gender, email, name, password);
-    return {email, name, password};
-  });
+  const handleOnSubmit = handleSubmit(
+    ({email, name, password, gender, dateOfBirth}) => {
+      console.log(gender, email, name, password, dateOfBirth);
+      return {email, name, password, dateOfBirth};
+    },
+  );
 
   return (
     <View style={styles.wrapper}>
@@ -107,48 +116,70 @@ const SignUp = ({navigation}: TSignUpProps) => {
         />
       </View>
       <View style={styles.dropdownWrapper}>
-        <Controller
-          control={control}
-          rules={{
-            required: {value: true, message: 'Field Required'},
-          }}
-          render={({field: {onChange, value}}) => (
-            <DropDownPicker
-              dropDownContainerStyle={{width: SCREEN_WIDTH / 3, zIndex: 99}}
-              open={open}
-              value={value}
-              items={items}
-              setOpen={setOpen}
-              setValue={onChange}
-              setItems={setItems}
-              placeholder="Gender"
-              style={styles.dropdownsGender}
-            />
-          )}
-          name="gender"
-        />
-
-        <Button
-          onPress={() => setOpenDate(true)}
-          textColor={colors.BLACK}
-          type="ghost"
-          style={styles.datePicker}>
-          {date ? date.toLocaleDateString() : 'Date of birth'}
-        </Button>
+        <View style={styles.dropdownContainer}>
+          <Typography color={colors.BLACK} type={'bold'}>
+            Gender
+          </Typography>
+          <Controller
+            control={control}
+            rules={{
+              required: {value: true, message: 'Field Required'},
+            }}
+            render={({field: {onChange, value}}) => (
+              <DropDownPicker
+                dropDownContainerStyle={{width: SCREEN_WIDTH / 3}}
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={value => onChange(value())}
+                setItems={setItems}
+                placeholder="Gender"
+                style={styles.dropdown}
+              />
+            )}
+            name="gender"
+          />
+          {errors.gender && <ErrorMessage>Field Required</ErrorMessage>}
+        </View>
+        <View style={styles.dropdownContainer}>
+          <Typography color={colors.BLACK} type={'bold'}>
+            Date of Birth
+          </Typography>
+          <Button
+            onPress={() => setOpenDate(true)}
+            textColor={colors.BLACK}
+            type="ghost"
+            style={styles.dropdown}>
+            {watch('dateOfBirth')
+              ? watch('dateOfBirth').toLocaleDateString()
+              : 'Select Date'}
+          </Button>
+          <Controller
+            control={control}
+            rules={{
+              required: {value: true, message: 'Field Required'},
+            }}
+            render={({field: {onChange, value = new Date()}}) => (
+              <DatePicker
+                modal
+                open={openDate}
+                date={value}
+                onConfirm={date => {
+                  setOpenDate(false);
+                  onChange(date);
+                }}
+                onCancel={() => {
+                  setOpenDate(false);
+                }}
+                mode="date"
+              />
+            )}
+            name="dateOfBirth"
+          />
+          {errors.dateOfBirth && <ErrorMessage>Field Required</ErrorMessage>}
+        </View>
       </View>
-      <DatePicker
-        modal
-        open={openDate}
-        date={date}
-        onConfirm={date => {
-          setOpenDate(false);
-          setDate(date);
-        }}
-        onCancel={() => {
-          setOpenDate(false);
-        }}
-        mode="date"
-      />
 
       <View style={styles.termsWrapper}>
         <Controller
@@ -177,9 +208,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
           </Typography>
         </Typography>
         {errors.terms && (
-          <Typography color={colors.RED} style={styles.termsError} type="bold">
-            Accepting Terms and conditions required
-          </Typography>
+          <ErrorMessage>Accepting Terms and conditions required</ErrorMessage>
         )}
       </View>
       <View style={styles.buttonsWrapper}>
@@ -239,11 +268,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: normalize(20, 'width'),
   },
-  termsError: {
-    position: 'absolute',
-    left: normalize(16, 'width'),
-    bottom: normalize(-20, 'height'),
-  },
   buttonsWrapper: {
     width: '100%',
     marginVertical: normalize(27, 'height'),
@@ -256,15 +280,16 @@ const styles = StyleSheet.create({
     textDecorationColor: colors.VIOLET,
   },
   dropdownWrapper: {
-    width: '63%',
+    width: SCREEN_WIDTH,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginBottom: normalize(15, 'height'),
   },
-  dropdownsGender: {
-    width: SCREEN_WIDTH / 3,
-    height: normalize(56, 'height'),
+  dropdownContainer: {
+    alignItems: 'center',
   },
-  datePicker: {
+  dropdown: {
     width: SCREEN_WIDTH / 3,
     height: normalize(56, 'height'),
   },

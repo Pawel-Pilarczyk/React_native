@@ -6,6 +6,7 @@ import Checkbox from './Checkbox';
 import PINCircle from './PINCircle';
 import Keyboard from './Keyboard';
 import {KeyboardKey} from './KeyboardKey';
+import ErrorMessage from './ErrorMessage';
 export {
   Button,
   Typography,
@@ -15,4 +16,5 @@ export {
   PINCircle,
   Keyboard,
   KeyboardKey,
+  ErrorMessage,
 };
