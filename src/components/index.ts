@@ -7,6 +7,8 @@ import PINCircle from './PINCircle';
 import Keyboard from './Keyboard';
 import {KeyboardKey} from './KeyboardKey';
 import ErrorMessage from './ErrorMessage';
+import BirthDatePicker from './BirthDatePicker';
+import DropDown from './DropDown';
 export {
   Button,
   Typography,
@@ -17,4 +19,6 @@ export {
   Keyboard,
   KeyboardKey,
   ErrorMessage,
+  BirthDatePicker,
+  DropDown,
 };
