@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
 import {colors} from '@constants/index';
 import {normalize} from '@utils/index';
+import {arrowRight} from '@assets/images';
 import {Typography, PINCircle, Keyboard} from '@components/index';
 
 export type TPINsetupProps = NativeStackScreenProps<
@@ -24,6 +25,8 @@ const PINsetup = ({navigation}: TPINsetupProps) => {
 
   const handleNavigate = () => navigation.navigate('SetUpPIN');
 
+  const handleNavigateBack = () => navigation.goBack();
+
   const PINCirclesData = [
     pin.length >= 1,
     pin.length >= 2,
@@ -33,6 +36,9 @@ const PINsetup = ({navigation}: TPINsetupProps) => {
 
   return (
     <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.arrowBack} onPress={handleNavigateBack}>
+        <Image source={arrowRight} />
+      </TouchableOpacity>
       <Typography
         type="bold"
         color={colors.WHITE}
@@ -55,10 +61,17 @@ const PINsetup = ({navigation}: TPINsetupProps) => {
 };
 
 const styles = StyleSheet.create({
+  arrowBack: {
+    position: 'absolute',
+    left: normalize(20, 'width'),
+    top: normalize(20, 'width'),
+    transform: [{rotateY: '180deg'}, {scale: 0.6}],
+  },
   wrapper: {
     flex: 1,
     backgroundColor: colors.VIOLET,
     alignItems: 'center',
+    position: 'relative',
   },
   paragraph: {
     marginTop: normalize(90, 'height'),

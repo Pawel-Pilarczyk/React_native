@@ -1,10 +1,13 @@
-import React from 'react';
-import {ScrollView, View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import DropDownPicker from 'react-native-dropdown-picker';
+import DatePicker from 'react-native-date-picker';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
+import {SCREEN_WIDTH} from '@constants/index';
 import {emailPattern} from '@constants/validators';
 import {Input, Button, Typography, Checkbox} from '@components/index';
 import {googleIcon} from '@assets/images';
@@ -14,11 +17,20 @@ type TFormFields = {
   email: string;
   password: string;
   terms: boolean;
+  gender: string;
 };
 
 export type TSignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
 const SignUp = ({navigation}: TSignUpProps) => {
+  const [date, setDate] = useState(new Date());
+  const [openDate, setOpenDate] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [items, setItems] = useState([
+    {label: 'Male', value: 'male'},
+    {label: 'Female', value: 'female'},
+  ]);
   const {
     control,
     handleSubmit,
@@ -29,12 +41,13 @@ const SignUp = ({navigation}: TSignUpProps) => {
     navigation.navigate('Login');
   };
 
-  const handleOnSubmit = handleSubmit(({email, name, password}) => {
+  const handleOnSubmit = handleSubmit(({email, name, password, gender}) => {
+    console.log(gender, email, name, password);
     return {email, name, password};
   });
 
   return (
-    <ScrollView contentContainerStyle={styles.wrapper}>
+    <View style={styles.wrapper}>
       <View style={styles.inputsWrapper}>
         <Controller
           control={control}
@@ -93,6 +106,50 @@ const SignUp = ({navigation}: TSignUpProps) => {
           name="password"
         />
       </View>
+      <View style={styles.dropdownWrapper}>
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Field Required'},
+          }}
+          render={({field: {onChange, value}}) => (
+            <DropDownPicker
+              dropDownContainerStyle={{width: SCREEN_WIDTH / 3, zIndex: 99}}
+              open={open}
+              value={value}
+              items={items}
+              setOpen={setOpen}
+              setValue={onChange}
+              setItems={setItems}
+              placeholder="Gender"
+              style={styles.dropdownsGender}
+            />
+          )}
+          name="gender"
+        />
+
+        <Button
+          onPress={() => setOpenDate(true)}
+          textColor={colors.BLACK}
+          type="ghost"
+          style={styles.datePicker}>
+          {date ? date.toLocaleDateString() : 'Date of birth'}
+        </Button>
+      </View>
+      <DatePicker
+        modal
+        open={openDate}
+        date={date}
+        onConfirm={date => {
+          setOpenDate(false);
+          setDate(date);
+        }}
+        onCancel={() => {
+          setOpenDate(false);
+        }}
+        mode="date"
+      />
+
       <View style={styles.termsWrapper}>
         <Controller
           control={control}
@@ -160,7 +217,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
           Login
         </Typography>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -197,7 +254,19 @@ const styles = StyleSheet.create({
   linkStyle: {
     textDecorationLine: 'underline',
     textDecorationColor: colors.VIOLET,
-    flexShrink: 1,
+  },
+  dropdownWrapper: {
+    width: '63%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  dropdownsGender: {
+    width: SCREEN_WIDTH / 3,
+    height: normalize(56, 'height'),
+  },
+  datePicker: {
+    width: SCREEN_WIDTH / 3,
+    height: normalize(56, 'height'),
   },
 });
 

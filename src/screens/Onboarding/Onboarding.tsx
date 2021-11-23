@@ -20,7 +20,6 @@ export type TOnboardingProps = NativeStackScreenProps<
 
 export const Onboarding = ({navigation}: TOnboardingProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
-
   const handleScroll = ({
     nativeEvent: {
       contentOffset: {x},
