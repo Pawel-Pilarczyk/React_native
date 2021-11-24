@@ -1,18 +1,20 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Image, View} from 'react-native';
-import {SCREEN_WIDTH} from '@constants/index';
+import {TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {normalize} from '@utils/index';
 import {Typography} from '@components/index';
 import {arrowRight} from '@assets/images/index';
 
 type TKeyboardKeyProps = {
   char: string;
-  handlePress?: () => void;
+  handlePress?: (char: string) => void;
 };
 
 export const KeyboardKey = ({char, handlePress}: TKeyboardKeyProps) => {
+  const handleKeyPress = () => {
+    handlePress && handlePress(char);
+  };
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.key}>
+    <TouchableOpacity onPress={handleKeyPress} style={styles.key}>
       {char === 'continue' ? (
         <Image source={arrowRight} style={styles.arrow} />
       ) : (
@@ -26,7 +28,7 @@ export const KeyboardKey = ({char, handlePress}: TKeyboardKeyProps) => {
 
 const styles = StyleSheet.create({
   key: {
-    width: SCREEN_WIDTH / 3,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

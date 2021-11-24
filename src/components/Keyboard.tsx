@@ -1,9 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-
-import {SCREEN_WIDTH} from '@constants/index';
 import {normalize} from '@utils/index';
-
 import {KeyboardKey} from '@components/index';
 
 type TKeyboardProps = {
@@ -24,7 +21,7 @@ const Keyboard = ({
     ['X', '0', 'continue'],
   ];
 
-  const handlePressDigit = (char: string) => () => {
+  const handlePressDigit = (char: string) => {
     if (char === 'continue' && handleContinue) return handleContinue();
     return isNaN(+char)
       ? handleRemoveDigit && handleRemoveDigit()
@@ -36,7 +33,11 @@ const Keyboard = ({
       {rows.map((row, id) => (
         <View style={styles.buttonsWrapper} key={id}>
           {row.map(item => (
-            <KeyboardKey char={item} handlePress={handlePressDigit(item)} />
+            <KeyboardKey
+              char={item}
+              handlePress={handlePressDigit}
+              key={item}
+            />
           ))}
         </View>
       ))}
@@ -51,8 +52,9 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
   },
   buttonsWrapper: {
-    width: SCREEN_WIDTH,
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
     height: normalize(90, 'height'),
+    width: '100%',
   },
 });

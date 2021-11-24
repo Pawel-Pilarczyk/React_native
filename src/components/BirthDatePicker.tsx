@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
 import {normalize} from '@utils/index';
-import {SCREEN_WIDTH, colors} from '@constants/index';
+import {colors} from '@constants/index';
 import {Typography, Button, ErrorMessage} from '@components/index';
 
 type TBirthDatePickerProps = {
@@ -29,13 +29,16 @@ const BirthDatePicker = ({
   const handleCancel = () => {
     setOpenDate(false);
   };
+
+  const handleOpenDatePicker = () => setOpenDate(true);
+
   return (
     <View style={styles.dropdownContainer}>
       <Typography color={colors.BLACK} type={'bold'}>
         Date of Birth
       </Typography>
       <Button
-        onPress={() => setOpenDate(true)}
+        onPress={handleOpenDatePicker}
         textColor={colors.BLACK}
         type="ghost"
         style={styles.dropdown}>
@@ -49,7 +52,6 @@ const BirthDatePicker = ({
         onCancel={handleCancel}
         mode="date"
       />
-
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </View>
   );
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dropdown: {
-    width: SCREEN_WIDTH / 3,
     height: normalize(56, 'height'),
+    paddingHorizontal: normalize(30, 'width'),
   },
 });

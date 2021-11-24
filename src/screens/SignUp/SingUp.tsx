@@ -5,7 +5,6 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
-import {SCREEN_WIDTH} from '@constants/index';
 import {emailPattern} from '@constants/validators';
 import {
   Input,
@@ -34,6 +33,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
     {label: 'Male', value: 'male'},
     {label: 'Female', value: 'female'},
   ];
+
   const {
     control,
     handleSubmit,
@@ -51,6 +51,9 @@ const SignUp = ({navigation}: TSignUpProps) => {
       return {email, name, password, dateOfBirth};
     },
   );
+  const dateOfBirthPlaceholder = watch('dateOfBirth')
+    ? watch('dateOfBirth').toLocaleDateString()
+    : 'Select Date';
   return (
     <View style={styles.wrapper}>
       <View style={styles.inputsWrapper}>
@@ -121,10 +124,10 @@ const SignUp = ({navigation}: TSignUpProps) => {
             <DropDown
               items={items}
               onChange={onChange}
-              size="medium"
               value={value}
               placeholder="Gender"
               error={errors.gender?.message}
+              style={styles.genderDropdown}
             />
           )}
           name="gender"
@@ -139,9 +142,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
               onChange={onChange}
               value={value}
               error={errors.dateOfBirth?.message}>
-              {watch('dateOfBirth')
-                ? watch('dateOfBirth').toLocaleDateString()
-                : 'Select Date'}
+              {dateOfBirthPlaceholder}
             </BirthDatePicker>
           )}
           name="dateOfBirth"
@@ -187,7 +188,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
           color={colors.GREY}
           size={14}
           type="bold"
-          style={{textAlign: 'center', padding: 12}}>
+          style={styles.buttonsText}>
           Or with
         </Typography>
         <Button
@@ -217,10 +218,11 @@ const SignUp = ({navigation}: TSignUpProps) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexGrow: 1,
+    flex: 1,
     alignItems: 'center',
     backgroundColor: colors.WHITE,
     paddingHorizontal: normalize(16, 'width'),
+    paddingBottom: normalize(15, 'height'),
   },
   inputsWrapper: {
     marginTop: normalize(56, 'height'),
@@ -245,11 +247,18 @@ const styles = StyleSheet.create({
     textDecorationColor: colors.VIOLET,
   },
   dropdownWrapper: {
-    width: SCREEN_WIDTH,
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: normalize(15, 'height'),
+  },
+  genderDropdown: {
+    width: '40%',
+  },
+  buttonsText: {
+    textAlign: 'center',
+    padding: 12,
   },
 });
 
