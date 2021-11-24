@@ -6,9 +6,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
-
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
 import {RootStackParamList} from 'navigation/types';
 import {slidesData} from './slidesData';
 import {normalize} from '@utils/index';
@@ -22,7 +20,6 @@ export type TOnboardingProps = NativeStackScreenProps<
 
 export const Onboarding = ({navigation}: TOnboardingProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
-
   const handleScroll = ({
     nativeEvent: {
       contentOffset: {x},
@@ -36,7 +33,9 @@ export const Onboarding = ({navigation}: TOnboardingProps) => {
     }
   };
 
-  const handleNavigation = () => navigation.navigate('SignUp');
+  const navigateToSignUpHandler = () => navigation.navigate('SignUp');
+
+  const navigateToLoginHandler = () => navigation.navigate('Login');
 
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
@@ -71,13 +70,16 @@ export const Onboarding = ({navigation}: TOnboardingProps) => {
       </View>
       <View style={styles.buttonWrapper}>
         <Button
-          onPress={handleNavigation}
+          onPress={navigateToSignUpHandler}
           textColor={colors.WHITE}
           type="primary"
           style={styles.button}>
           Sign Up
         </Button>
-        <Button onPress={() => {}} textColor={colors.VIOLET} type="secondary">
+        <Button
+          onPress={navigateToLoginHandler}
+          textColor={colors.VIOLET}
+          type="secondary">
           Login
         </Button>
       </View>

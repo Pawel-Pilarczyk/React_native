@@ -1,12 +1,20 @@
 import React from 'react';
-import {ScrollView, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
 import {normalize} from '@utils/index';
 import * as colors from '@constants/colors';
 import {emailPattern} from '@constants/validators';
-import {Input, Button, Typography, Checkbox} from '@components/index';
+import {
+  Input,
+  Button,
+  Typography,
+  Checkbox,
+  ErrorMessage,
+  BirthDatePicker,
+  DropDown,
+} from '@components/index';
 import {googleIcon} from '@assets/images';
 
 type TFormFields = {
@@ -14,14 +22,22 @@ type TFormFields = {
   email: string;
   password: string;
   terms: boolean;
+  gender: string;
+  dateOfBirth: Date;
 };
 
 export type TSignUpProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
 const SignUp = ({navigation}: TSignUpProps) => {
+  const items = [
+    {label: 'Male', value: 'male'},
+    {label: 'Female', value: 'female'},
+  ];
+
   const {
     control,
     handleSubmit,
+    watch,
     formState: {errors},
   } = useForm<TFormFields>();
 
@@ -29,12 +45,17 @@ const SignUp = ({navigation}: TSignUpProps) => {
     navigation.navigate('Login');
   };
 
-  const handleOnSubmit = handleSubmit(({email, name, password}) => {
-    return {email, name, password};
-  });
-
+  const handleOnSubmit = handleSubmit(
+    ({email, name, password, gender, dateOfBirth}) => {
+      console.log(gender, email, name, password, dateOfBirth);
+      return {email, name, password, dateOfBirth};
+    },
+  );
+  const dateOfBirthPlaceholder = watch('dateOfBirth')
+    ? watch('dateOfBirth').toLocaleDateString()
+    : 'Select Date';
   return (
-    <ScrollView contentContainerStyle={styles.wrapper}>
+    <View style={styles.wrapper}>
       <View style={styles.inputsWrapper}>
         <Controller
           control={control}
@@ -93,6 +114,40 @@ const SignUp = ({navigation}: TSignUpProps) => {
           name="password"
         />
       </View>
+      <View style={styles.dropdownWrapper}>
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Field Required'},
+          }}
+          render={({field: {onChange, value}}) => (
+            <DropDown
+              items={items}
+              onChange={onChange}
+              value={value}
+              placeholder="Gender"
+              error={errors.gender?.message}
+              style={styles.genderDropdown}
+            />
+          )}
+          name="gender"
+        />
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Field Required'},
+          }}
+          render={({field: {onChange, value = new Date()}}) => (
+            <BirthDatePicker
+              onChange={onChange}
+              value={value}
+              error={errors.dateOfBirth?.message}>
+              {dateOfBirthPlaceholder}
+            </BirthDatePicker>
+          )}
+          name="dateOfBirth"
+        />
+      </View>
       <View style={styles.termsWrapper}>
         <Controller
           control={control}
@@ -108,7 +163,6 @@ const SignUp = ({navigation}: TSignUpProps) => {
           )}
           name="terms"
         />
-
         <Typography color={colors.BLACK} size={14} type={'semiBold'}>
           By signing up, you agree to the
           <Typography
@@ -120,9 +174,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
           </Typography>
         </Typography>
         {errors.terms && (
-          <Typography color={colors.RED} style={styles.termsError} type="bold">
-            Accepting Terms and conditions required
-          </Typography>
+          <ErrorMessage>Accepting Terms and conditions required</ErrorMessage>
         )}
       </View>
       <View style={styles.buttonsWrapper}>
@@ -136,7 +188,7 @@ const SignUp = ({navigation}: TSignUpProps) => {
           color={colors.GREY}
           size={14}
           type="bold"
-          style={{textAlign: 'center', padding: 12}}>
+          style={styles.buttonsText}>
           Or with
         </Typography>
         <Button
@@ -160,16 +212,17 @@ const SignUp = ({navigation}: TSignUpProps) => {
           Login
         </Typography>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexGrow: 1,
+    flex: 1,
     alignItems: 'center',
     backgroundColor: colors.WHITE,
     paddingHorizontal: normalize(16, 'width'),
+    paddingBottom: normalize(15, 'height'),
   },
   inputsWrapper: {
     marginTop: normalize(56, 'height'),
@@ -182,14 +235,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: normalize(20, 'width'),
   },
-  termsError: {
-    position: 'absolute',
-    left: normalize(16, 'width'),
-    bottom: normalize(-20, 'height'),
-  },
   buttonsWrapper: {
     width: '100%',
-    marginVertical: normalize(27, 'height'),
+    marginVertical: normalize(30, 'height'),
   },
   loginLinkWrapper: {
     flexDirection: 'row',
@@ -197,7 +245,20 @@ const styles = StyleSheet.create({
   linkStyle: {
     textDecorationLine: 'underline',
     textDecorationColor: colors.VIOLET,
-    flexShrink: 1,
+  },
+  dropdownWrapper: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: normalize(15, 'height'),
+  },
+  genderDropdown: {
+    width: '40%',
+  },
+  buttonsText: {
+    textAlign: 'center',
+    padding: 12,
   },
 });
 

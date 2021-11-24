@@ -2,7 +2,13 @@ import React from 'react';
 import * as colors from '../constants/colors';
 import {normalize} from '../utils';
 
-import {Pressable, StyleSheet, StyleProp, ViewStyle, Image} from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  Image,
+} from 'react-native';
 
 import {Typography} from './index';
 
@@ -32,12 +38,12 @@ export const Button = ({
   ];
 
   return (
-    <Pressable onPress={onPress} style={buttonStyles}>
+    <TouchableOpacity onPress={onPress} style={buttonStyles}>
       {icon && <Image source={icon} />}
       <Typography color={textColor} size={18} type="semiBold">
         {children}
       </Typography>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
