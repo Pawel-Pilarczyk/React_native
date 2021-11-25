@@ -14,14 +14,14 @@ export const appSlice = createSlice({
       ...state,
       isLoggedIn: true,
     }),
-    logoOut: state => ({
+    logOut: state => ({
       ...state,
       isLoggedIn: false,
     }),
   },
 });
 
-export const {logIn, logoOut} = appSlice.actions;
+export const {logIn, logOut} = appSlice.actions;
 
 export const selectIsLoggedIn = (state: RootState) => state.app.isLoggedIn;
 

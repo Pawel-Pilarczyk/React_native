@@ -2,8 +2,9 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
 import {RootStackParamList} from 'navigation/types';
+import {useAppDispatch} from '@hooks/index';
+import {logIn} from '../../store/app/app.slice';
 import {colors, validators} from '@constants/index';
 import {normalize} from '@utils/index';
 import {Input, Button, Typography} from '@components/index';
@@ -16,6 +17,8 @@ type TFormFields = {
 };
 
 const Login = ({navigation}: TLoginProps) => {
+  const dispatch = useAppDispatch();
+
   const {
     control,
     handleSubmit,
@@ -23,7 +26,7 @@ const Login = ({navigation}: TLoginProps) => {
   } = useForm<TFormFields>();
 
   const handleLogin = handleSubmit(({password, login}) => {
-    navigation.navigate('SetUpPIN');
+    dispatch(logIn());
     return {password, login};
   });
 

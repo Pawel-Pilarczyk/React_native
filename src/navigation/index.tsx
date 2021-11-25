@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
 import {useAppSelector} from '../hooks';
 
-import {Onboarding, SignUp, Login, PINsetup} from '@screens/index';
+import {Onboarding, SignUp, Login, PINsetup, Home} from '@screens/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -43,7 +43,11 @@ const Navigation = () => {
             />
           </>
         ) : (
-          ''
+          <RootStack.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
         )}
       </RootStack.Navigator>
     </NavigationContainer>
