@@ -27,7 +27,7 @@ const DropDown = ({
 }: TDropDownProps) => {
   const [open, setOpen] = useState(false);
   return (
-    <View style={style}>
+    <View style={[styles.container, style]}>
       {placeholder && (
         <Typography color={colors.BLACK} type={'bold'}>
           {placeholder}
@@ -50,6 +50,10 @@ const DropDown = ({
 export default DropDown;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
   dropdown: {
     height: normalize(56, 'height'),
     backgroundColor: colors.WHITE,

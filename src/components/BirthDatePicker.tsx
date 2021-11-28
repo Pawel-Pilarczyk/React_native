@@ -62,9 +62,10 @@ export default BirthDatePicker;
 const styles = StyleSheet.create({
   dropdownContainer: {
     alignItems: 'center',
+    flex: 1,
   },
   dropdown: {
     height: normalize(56, 'height'),
-    paddingHorizontal: normalize(30, 'width'),
+    width: '100%',
   },
 });

@@ -21,6 +21,8 @@ module.exports = {
           '@constants': 'awesomeproject/src/constants',
           '@screens': 'awesomeproject/src/screens',
           '@utils': 'awesomeproject/src/utils',
+          '@hooks': 'awesomeproject/src/hooks',
+          '@store': 'awesomeproject/src/store',
         },
       },
     ],
