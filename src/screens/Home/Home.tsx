@@ -5,7 +5,7 @@ import {RootStackParamList} from 'navigation/types';
 import {colors} from '@constants/index';
 import {Button} from '@components/index';
 import {useAppDispatch} from '@hooks/index';
-import {logOut} from '../../store/app/app.slice';
+import {logOut} from '../../store/app/actions';
 
 export type THomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 

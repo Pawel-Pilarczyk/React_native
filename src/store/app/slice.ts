@@ -1,6 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {RootState} from '../store';
-import {TAppSlice} from './app.types';
+import {TAppSlice} from './types';
 
 const initialState: TAppSlice = {
   isLoggedIn: false,
@@ -20,9 +19,5 @@ export const appSlice = createSlice({
     }),
   },
 });
-
-export const {logIn, logOut} = appSlice.actions;
-
-export const selectIsLoggedIn = (state: RootState) => state.app.isLoggedIn;
 
 export default appSlice.reducer;

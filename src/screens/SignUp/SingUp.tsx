@@ -249,12 +249,10 @@ const styles = StyleSheet.create({
   dropdownWrapper: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     marginBottom: normalize(15, 'height'),
   },
   genderDropdown: {
-    width: '40%',
+    marginRight: 20,
   },
   buttonsText: {
     textAlign: 'center',
