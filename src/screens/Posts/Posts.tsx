@@ -4,8 +4,9 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useAppDispatch, useAppSelector} from '@hooks/index';
 import {RootStackParamList} from '../../navigation/types';
 import {fetchPosts} from '../../store/userProfile/thunk';
-import {Post} from '@components/index';
+import {Post, Typography} from '@components/index';
 import {normalize} from '@utils/index';
+import {colors} from '@constants/index';
 
 export type TPostsProps = NativeStackScreenProps<RootStackParamList, 'Posts'>;
 
@@ -19,9 +20,13 @@ const Posts = ({navigation}: TPostsProps) => {
 
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
-      {posts.map(post => (
-        <Post post={post} key={post.id} />
-      ))}
+      {posts.length ? (
+        posts.map(post => <Post post={post} key={post.id} />)
+      ) : (
+        <Typography style={styles.loading} color={colors.BLACK}>
+          Loading...
+        </Typography>
+      )}
     </ScrollView>
   );
 };
@@ -33,5 +38,8 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'white',
     paddingVertical: normalize(20, 'width'),
+  },
+  loading: {
+    textAlign: 'center',
   },
 });
