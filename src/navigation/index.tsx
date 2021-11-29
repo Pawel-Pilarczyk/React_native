@@ -45,7 +45,7 @@ const Navigation = () => {
           </>
         ) : (
           <RootStack.Screen
-            name="Home"
+            name="UserProfile"
             component={UserProfile}
             options={{headerShown: false}}
           />

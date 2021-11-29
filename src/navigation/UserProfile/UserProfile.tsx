@@ -12,7 +12,6 @@ const UserProfile = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
-
           if (route.name === 'Home') {
             iconName = focused
               ? 'ios-information-circle'
@@ -20,8 +19,6 @@ const UserProfile = () => {
           } else if (route.name === 'Posts') {
             iconName = focused ? 'book' : 'book-outline';
           }
-
-          // You can return any component that you like here!
           return (
             <Ionicons name={iconName as string} size={size} color={color} />
           );
