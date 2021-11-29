@@ -9,6 +9,7 @@ import {KeyboardKey} from './KeyboardKey';
 import ErrorMessage from './ErrorMessage';
 import BirthDatePicker from './BirthDatePicker';
 import DropDown from './DropDown';
+import Post from './Post';
 export {
   Button,
   Typography,
@@ -21,4 +22,5 @@ export {
   ErrorMessage,
   BirthDatePicker,
   DropDown,
+  Post,
 };

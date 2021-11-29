@@ -5,4 +5,5 @@ export type RootStackParamList = {
   SetUpPIN: undefined;
   Home: undefined;
   UserProfile: undefined;
+  Posts: undefined;
 };
