@@ -3,8 +3,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
 import {useAppSelector} from '../hooks';
+import UserProfile from './UserProfile/UserProfile';
 
-import {Onboarding, SignUp, Login, PINsetup, Home} from '@screens/index';
+import {Onboarding, SignUp, Login, PINsetup} from '@screens/index';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -44,8 +45,8 @@ const Navigation = () => {
           </>
         ) : (
           <RootStack.Screen
-            name="Home"
-            component={Home}
+            name="UserProfile"
+            component={UserProfile}
             options={{headerShown: false}}
           />
         )}

@@ -9,14 +9,12 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    logIn: state => ({
-      ...state,
-      isLoggedIn: true,
-    }),
-    logOut: state => ({
-      ...state,
-      isLoggedIn: false,
-    }),
+    logIn: state => {
+      state.isLoggedIn = true;
+    },
+    logOut: state => {
+      state.isLoggedIn = false;
+    },
   },
 });
 
