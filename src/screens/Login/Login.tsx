@@ -30,6 +30,9 @@ const Login = ({navigation}: TLoginProps) => {
     return {password, login};
   });
 
+  const handleNavigateToForgotPassword = () =>
+    navigation.navigate('ForgotPasswordInitial');
+
   const navigateToSignUpHandler = () => navigation.navigate('SignUp');
   return (
     <View style={styles.wrapper}>
@@ -84,7 +87,8 @@ const Login = ({navigation}: TLoginProps) => {
         color={colors.VIOLET}
         size={18}
         type={'bold'}
-        style={styles.forgotPass}>
+        style={styles.forgotPass}
+        onPress={handleNavigateToForgotPassword}>
         Forgot Password?
       </Typography>
       <Typography

@@ -21,4 +21,6 @@ export const userProfileSlice = createSlice({
   },
 });
 
+export const {setPosts} = userProfileSlice.actions;
+
 export default userProfileSlice.reducer;

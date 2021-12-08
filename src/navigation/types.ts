@@ -6,4 +6,6 @@ export type RootStackParamList = {
   Home: undefined;
   UserProfile: undefined;
   Posts: undefined;
+  SetUpAccount: undefined;
+  ForgotPasswordInitial: undefined;
 };

@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useAppDispatch, useAppSelector} from '@hooks/index';
+import {useAppDispatch, usePosts} from '@hooks/index';
+import {setPosts} from '../../store/userProfile/slice';
 import {RootStackParamList} from '../../navigation/types';
 import {fetchPosts} from '../../store/userProfile/thunk';
 import {Post, Typography} from '@components/index';
@@ -12,20 +13,30 @@ export type TPostsProps = NativeStackScreenProps<RootStackParamList, 'Posts'>;
 
 const Posts = ({navigation}: TPostsProps) => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector(state => state.userProfile.posts);
+  const {posts, isPostsLoading} = usePosts();
 
   useEffect(() => {
-    !posts.length && dispatch(fetchPosts());
+    !posts.length &&
+      dispatch(
+        fetchPosts({
+          onSuccess: response => {
+            dispatch(setPosts(response));
+          },
+          onError: error => {
+            console.log(error);
+          },
+        }),
+      );
   }, []);
 
   return (
     <ScrollView contentContainerStyle={styles.wrapper}>
-      {posts.length ? (
-        posts.map(post => <Post post={post} key={post.id} />)
-      ) : (
+      {isPostsLoading ? (
         <Typography style={styles.loading} color={colors.BLACK}>
           Loading...
         </Typography>
+      ) : (
+        posts.map(post => <Post post={post} key={post.id} />)
       )}
     </ScrollView>
   );
