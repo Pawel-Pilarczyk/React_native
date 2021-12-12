@@ -14,8 +14,11 @@ export type TForgotPasswordConfirmed = NativeStackScreenProps<
 
 export default function ForgorPasswordConfirmed({
   navigation,
+  route,
 }: TForgotPasswordConfirmed) {
   const handleNavigate = () => navigation.navigate('Login');
+  const {email} = route.params;
+  const paragraphText = `Check your email ${email} and follow the instructions to reset your password`;
   return (
     <View style={styles.wrapper}>
       <Image source={emailSent} style={styles.image} />
@@ -31,8 +34,7 @@ export default function ForgorPasswordConfirmed({
         size={16}
         type="semiBold"
         style={styles.paragraph}>
-        Check your email test@test.com and follow the instructions to reset your
-        password
+        {paragraphText}
       </Typography>
       <Button
         onPress={handleNavigate}
@@ -49,21 +51,20 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.WHITE,
-    paddingHorizontal: normalize(12, 'width'),
+    paddingHorizontal: normalize(24, 'width'),
   },
   image: {
     width: normalize(312, 'width'),
     height: normalize(312, 'width'),
     marginTop: normalize(76, 'height'),
-    paddingHorizontal: normalize(12, 'width'),
   },
   header: {
     marginTop: normalize(16, 'height'),
     textAlign: 'center',
-    paddingHorizontal: normalize(12, 'width'),
   },
   paragraph: {
     marginTop: normalize(24, 'height'),
+    paddingHorizontal: normalize(36, 'width'),
     textAlign: 'center',
   },
   button: {

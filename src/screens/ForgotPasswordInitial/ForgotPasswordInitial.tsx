@@ -27,7 +27,9 @@ const ForgotPasswordInitial = ({navigation}: TForgotPasswordInitialProps) => {
   } = useForm<TFormFields>();
 
   const handleRecoverPassword = handleSubmit(({email}) => {
-    navigation.navigate('Onboarding');
+    navigation.navigate('ForgotPasswordConfirmed', {
+      email,
+    });
     return email;
   });
 

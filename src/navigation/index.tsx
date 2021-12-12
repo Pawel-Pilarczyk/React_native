@@ -25,7 +25,7 @@ const Navigation = () => {
           <>
             <RootStack.Screen
               name="Onboarding"
-              component={ForgorPasswordConfirmed}
+              component={Onboarding}
               options={{headerShown: false}}
             />
             <RootStack.Screen
@@ -53,6 +53,11 @@ const Navigation = () => {
               name="ForgotPasswordInitial"
               component={ForgotPasswordInitial}
               options={{headerTitleAlign: 'center', title: 'Forgot Password'}}
+            />
+            <RootStack.Screen
+              name="ForgotPasswordConfirmed"
+              component={ForgorPasswordConfirmed}
+              options={{headerShown: false}}
             />
           </>
         ) : (
