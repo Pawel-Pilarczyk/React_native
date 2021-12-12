@@ -1,7 +1,7 @@
-import {SlideProps} from '../../components/Slide';
+import {TSlideProps} from '../../components/Slide';
 import {onboarding1, onboarding2, onboarding3} from '../../assets/images/index';
 
-export const slidesData: SlideProps[] = [
+export const slidesData: TSlideProps[] = [
   {
     id: 0,
     header: 'Gain total control of your money',
