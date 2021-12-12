@@ -8,4 +8,5 @@ export type RootStackParamList = {
   Posts: undefined;
   SetUpAccount: undefined;
   ForgotPasswordInitial: undefined;
+  ForgotPasswordConfirmed: undefined;
 };

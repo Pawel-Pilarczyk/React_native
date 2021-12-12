@@ -6,6 +6,7 @@ import Home from './Home/Home';
 import Posts from './Posts/Posts';
 import SetupAccount from './SetupAccount/setupAccount';
 import ForgotPasswordInitial from './ForgotPasswordInitial/ForgotPasswordInitial';
+import ForgorPasswordConfirmed from './ForgotPasswordConfirmed/ForgorPasswordConfirmed';
 
 export {
   Onboarding,
@@ -16,4 +17,5 @@ export {
   Posts,
   SetupAccount,
   ForgotPasswordInitial,
+  ForgorPasswordConfirmed,
 };

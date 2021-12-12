@@ -6,6 +6,7 @@ import eyeClosed from './eyeClosed.png';
 import checkMark from './checkMark.png';
 import googleIcon from './googleIcon.png';
 import arrowRight from './arrowRight.png';
+import emailSent from './emailSent.png';
 
 export {
   onboarding1,
@@ -16,4 +17,5 @@ export {
   checkMark,
   googleIcon,
   arrowRight,
+  emailSent,
 };

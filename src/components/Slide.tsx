@@ -8,9 +8,9 @@ import {Typography} from './';
 import * as colors from '../constants/colors';
 
 export type TSlideProps = {
-  id: number;
+  id?: number;
   header: string;
-  paragraph: string;
+  paragraph?: string;
   picture: any;
 };
 
@@ -29,7 +29,7 @@ const Slide = ({header, paragraph, picture}: TSlideProps) => (
       size={16}
       color={colors.GREY}
       style={styles.paragraph}>
-      {paragraph}
+      {paragraph ? paragraph : ''}
     </Typography>
   </View>
 );
