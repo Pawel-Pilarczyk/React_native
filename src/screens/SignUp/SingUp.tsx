@@ -3,9 +3,8 @@ import {View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
-import {normalize} from '@utils/index';
-import * as colors from '@constants/colors';
-import {emailPattern} from '@constants/validators';
+import {normalize} from '@utils';
+import {colors, validators} from '@constants';
 import {
   Input,
   Button,
@@ -78,7 +77,10 @@ const SignUp = ({navigation}: TSignUpProps) => {
           control={control}
           rules={{
             required: {value: true, message: 'Field Required'},
-            pattern: {value: emailPattern, message: 'Incorrect email pattern'},
+            pattern: {
+              value: validators.emailPattern,
+              message: 'Incorrect email pattern',
+            },
           }}
           render={({field: {onChange, onBlur, value}}) => (
             <Input

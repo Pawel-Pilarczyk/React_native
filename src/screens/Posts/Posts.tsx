@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useAppDispatch, usePosts} from '@hooks/index';
-import {setPosts} from '../../store/userProfile/slice';
+import {useAppDispatch, usePosts} from '@hooks';
+import {setPosts} from '@store/userProfile/slice';
+import {fetchPosts} from '@store/userProfile/thunk';
 import {RootStackParamList} from '../../navigation/types';
-import {fetchPosts} from '../../store/userProfile/thunk';
-import {Post, Typography} from '@components/index';
-import {normalize} from '@utils/index';
-import {colors} from '@constants/index';
+import {Post, Typography} from '@components';
+import {normalize} from '@utils';
+import {colors} from '@constants';
 
 export type TPostsProps = NativeStackScreenProps<RootStackParamList, 'Posts'>;
 
@@ -36,7 +36,7 @@ const Posts = ({navigation}: TPostsProps) => {
           Loading...
         </Typography>
       ) : (
-        posts.map(post => <Post post={post} key={post.id} />)
+        posts.map((post: any) => <Post post={post} key={post.id} />)
       )}
     </ScrollView>
   );

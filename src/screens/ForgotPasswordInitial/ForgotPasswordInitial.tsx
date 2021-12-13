@@ -3,10 +3,10 @@ import {StyleSheet, View, Animated} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
-import {colors} from '@constants/index';
-import {emailPattern} from '@constants/validators';
-import {Typography, Input, Button} from '@components/index';
-import {normalize} from '@utils/index';
+import {colors} from '@constants';
+import {validators} from '@constants';
+import {Typography, Input, Button} from '@components';
+import {normalize} from '@utils';
 
 export type TForgotPasswordInitialProps = NativeStackScreenProps<
   RootStackParamList,
@@ -61,7 +61,10 @@ const ForgotPasswordInitial = ({navigation}: TForgotPasswordInitialProps) => {
         control={control}
         rules={{
           required: {value: true, message: 'Field Required'},
-          pattern: {value: emailPattern, message: 'Incorrect email pattern'},
+          pattern: {
+            value: validators.emailPattern,
+            message: 'Incorrect email pattern',
+          },
         }}
         render={({field: {onChange, onBlur, value}}) => (
           <Input

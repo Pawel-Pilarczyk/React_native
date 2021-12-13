@@ -3,11 +3,11 @@ import {View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
-import {useAppDispatch} from '@hooks/index';
-import {logIn} from '../../store/app/actions';
-import {colors, validators} from '@constants/index';
-import {normalize} from '@utils/index';
-import {Input, Button, Typography} from '@components/index';
+import {useAppDispatch} from '@hooks';
+import {logIn} from '@store/app/actions';
+import {colors, validators} from '@constants';
+import {normalize} from '@utils';
+import {Input, Button, Typography} from '@components';
 
 export type TLoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
 

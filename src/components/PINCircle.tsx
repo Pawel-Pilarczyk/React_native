@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {colors} from '@constants/index';
-import {normalize} from '@utils/index';
+import {colors} from '@constants';
+import {normalize} from '@utils';
 
 type TPINCircle = {
   active: boolean;

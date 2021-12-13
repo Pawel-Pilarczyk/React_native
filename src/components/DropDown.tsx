@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, ViewStyle} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-
-import {colors} from '@constants/index';
-import {normalize} from '@utils/index';
-import {Typography, ErrorMessage} from '@components/index';
+import {colors} from '@constants';
+import {normalize} from '@utils';
+import {Typography, ErrorMessage} from '@components';
 
 type TItems = {label: string; value: string};
 

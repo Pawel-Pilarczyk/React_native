@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
-import {colors} from '@constants/index';
-import {Button} from '@components/index';
-import {useAppDispatch} from '@hooks/index';
-import {logOut} from '../../store/app/actions';
+import {colors} from '@constants';
+import {Button} from '@components';
+import {useAppDispatch} from '@hooks';
+import {logOut} from '@store/app/actions';
 
 export type THomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 

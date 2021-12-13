@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
-import {colors} from '@constants/index';
-import {normalize} from '@utils/index';
+import {colors} from '@constants';
+import {normalize} from '@utils';
 import {arrowRight} from '@assets/images';
-import {Typography, PINCircle, Keyboard} from '@components/index';
+import {Typography, PINCircle, Keyboard} from '@components';
 
 export type TPINsetupProps = NativeStackScreenProps<
   RootStackParamList,

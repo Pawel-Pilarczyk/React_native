@@ -8,10 +8,8 @@ import {
   TextInputProps,
   ViewStyle,
 } from 'react-native';
-
-import * as colors from '@constants/colors';
-import {normalize} from '@utils/index';
-
+import {colors} from '@constants';
+import {normalize} from '@utils';
 import {eye, eyeClosed} from '@assets/images/index';
 import {Typography} from './';
 

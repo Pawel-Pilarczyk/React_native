@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
-import {colors} from '@constants/index';
-import {normalize} from '@utils/index';
-import {Typography, Button} from '@components/index';
+import {colors} from '@constants';
+import {normalize} from '@utils';
+import {Typography, Button} from '@components';
 
 export type TSetupAccount = NativeStackScreenProps<
   RootStackParamList,

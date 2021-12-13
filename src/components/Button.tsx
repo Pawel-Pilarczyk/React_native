@@ -1,6 +1,6 @@
 import React from 'react';
-import * as colors from '../constants/colors';
-import {normalize} from '../utils';
+import {colors} from '@constants';
+import {normalize} from '@utils';
 
 import {
   TouchableOpacity,

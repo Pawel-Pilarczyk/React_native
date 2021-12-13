@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './types';
-import {useAppSelector} from '../hooks';
+import {useAppSelector} from '@hooks';
 import UserProfile from './UserProfile/UserProfile';
 
 import {
@@ -12,7 +12,8 @@ import {
   PINsetup,
   ForgotPasswordInitial,
   ForgorPasswordConfirmed,
-} from '@screens/index';
+  ResetPassword,
+} from '@screens';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,7 +26,7 @@ const Navigation = () => {
           <>
             <RootStack.Screen
               name="Onboarding"
-              component={Onboarding}
+              component={ResetPassword}
               options={{headerShown: false}}
             />
             <RootStack.Screen
