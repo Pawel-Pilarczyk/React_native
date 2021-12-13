@@ -26,7 +26,7 @@ const Navigation = () => {
           <>
             <RootStack.Screen
               name="Onboarding"
-              component={ResetPassword}
+              component={Onboarding}
               options={{headerShown: false}}
             />
             <RootStack.Screen
@@ -59,6 +59,11 @@ const Navigation = () => {
               name="ForgotPasswordConfirmed"
               component={ForgorPasswordConfirmed}
               options={{headerShown: false}}
+            />
+            <RootStack.Screen
+              name="ResetPassword"
+              component={ResetPassword}
+              options={{headerTitleAlign: 'center', title: 'Forgot Password'}}
             />
           </>
         ) : (

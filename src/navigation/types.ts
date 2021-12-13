@@ -11,4 +11,5 @@ export type RootStackParamList = {
   ForgotPasswordConfirmed: {
     email: string;
   };
+  ResetPassword: undefined;
 };
