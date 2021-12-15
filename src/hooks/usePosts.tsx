@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from '@hooks/index';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import {fetchPosts} from '../store/userProfile/thunk';
 import {setPosts} from '../store/userProfile/slice';
 import {getPosts} from '../store/userProfile/selectors';
@@ -20,9 +20,8 @@ export const usePosts = () => {
       dispatch(
         fetchPosts({
           onSuccess: response => {
-            setIsPostsLoading(false);
-
             dispatch(setPosts(response));
+            setIsPostsLoading(false);
           },
           onError: () => {
             setIsPostsLoading(false);
@@ -35,7 +34,7 @@ export const usePosts = () => {
     return () => {
       canceled = true;
     };
-  }, [dispatch, statePosts.length]);
+  }, [dispatch]);
 
   return {
     posts: statePosts,
