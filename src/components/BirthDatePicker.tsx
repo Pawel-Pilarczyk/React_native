@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-
-import {normalize} from '@utils/index';
-import {colors} from '@constants/index';
-import {Typography, Button, ErrorMessage} from '@components/index';
+import {normalize} from '@utils';
+import {colors} from '@constants';
+import {Typography, Button, ErrorMessage} from '@components';
 
 type TBirthDatePickerProps = {
   children: string | JSX.Element;

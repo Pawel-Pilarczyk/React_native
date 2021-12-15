@@ -1,8 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Image} from 'react-native';
-import {normalize} from '@utils/index';
-import {Typography} from '@components/index';
-import {arrowRight} from '@assets/images/index';
+import {normalize} from '@utils';
+import {arrowRight} from '@assets/images';
+import {Typography} from './Typography';
 
 type TKeyboardKeyProps = {
   char: string;

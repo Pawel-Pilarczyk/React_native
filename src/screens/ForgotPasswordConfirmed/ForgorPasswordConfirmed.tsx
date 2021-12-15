@@ -3,9 +3,9 @@ import {StyleSheet, View, Image} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
 import {emailSent} from '@assets/images';
-import {colors} from '@constants/index';
-import {normalize} from '@utils/index';
-import {Typography, Button} from '@components/index';
+import {colors} from '@constants';
+import {normalize} from '@utils';
+import {Typography, Button} from '@components';
 
 export type TForgotPasswordConfirmed = NativeStackScreenProps<
   RootStackParamList,

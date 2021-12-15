@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {normalize} from '@utils/index';
-import {colors} from '@constants/index';
-import {Typography} from '@components/index';
+import {normalize} from '@utils';
+import {colors} from '@constants';
+import {Typography} from '@components';
 
 type TErrorMessageProps = {
   children: string;

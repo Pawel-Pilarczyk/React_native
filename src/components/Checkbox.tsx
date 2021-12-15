@@ -6,8 +6,8 @@ import {
   PressableProps,
   Image,
 } from 'react-native';
-import {normalize} from '@utils/index';
-import * as colors from '@constants/colors';
+import {normalize} from '@utils';
+import {colors} from '@constants';
 
 import {checkMark} from '@assets/images';
 

@@ -9,8 +9,8 @@ import {
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'navigation/types';
 import {slidesData} from './slidesData';
-import {normalize} from '@utils/index';
-import * as colors from '@constants/colors';
+import {normalize} from '@utils';
+import {colors} from '@constants';
 import {Button, Slide} from '@components/index';
 
 export type TOnboardingProps = NativeStackScreenProps<

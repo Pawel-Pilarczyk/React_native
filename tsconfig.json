@@ -14,12 +14,13 @@
     "paths": {
       "*": ["src/*"],
       "@assets/*": ["src/assets/*"],
+      "@components": ["src/components"],
       "@components/*": ["src/components/*"],
-      "@constants/*": ["src/constants/*"],
-      "@screens/*": ["src/screens"],
-      "@utils/*": ["src/utils/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@store/*": ["src/store"]
+      "@constants": ["src/constants"],
+      "@screens": ["src/screens"],
+      "@utils": ["src/utils"],
+      "@hooks": ["src/hooks"],
+      "@store/*": ["src/store/*"]
     },
     "resolveJsonModule": true,
     "types": ["jest"]

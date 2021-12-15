@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {normalize} from '@utils/index';
-import {KeyboardKey} from '@components/index';
+import {normalize} from '@utils';
+import {KeyboardKey} from '@components';
 
 type TKeyboardProps = {
   handleAddDigit?: (value: string) => void;

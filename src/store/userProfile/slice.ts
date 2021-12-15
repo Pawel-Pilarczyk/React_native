@@ -14,11 +14,11 @@ export const userProfileSlice = createSlice({
       state.posts = action.payload;
     },
   },
-  extraReducers: builder => {
-    builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      state.posts = action.payload;
-    });
-  },
+  // extraReducers: builder => {
+  //   builder.addCase(fetchPosts.fulfilled, (state, action) => {
+  //     state.posts;
+  //   });
+  // },
 });
 
 export const {setPosts} = userProfileSlice.actions;

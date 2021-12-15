@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {TPost} from '../store/userProfile/types';
-import {normalize} from '@utils/index';
-import {colors} from '@constants/index';
-import {Typography} from '@components/index';
+import {normalize} from '@utils';
+import {colors} from '@constants';
+import {Typography} from '@components';
 
 type TPostProps = {
   post: TPost;

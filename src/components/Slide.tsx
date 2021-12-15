@@ -1,11 +1,8 @@
-import {normalize} from '../utils';
-import {SCREEN_WIDTH} from '../constants/dimensions';
-
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
+import {normalize} from '@utils';
+import {SCREEN_WIDTH, colors} from '@constants';
 import {Typography} from './';
-
-import * as colors from '../constants/colors';
 
 export type TSlideProps = {
   id?: number;
