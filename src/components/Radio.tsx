@@ -11,7 +11,7 @@ import {normalize} from '@utils';
 
 type TRadioProps = {
   style?: ViewStyle;
-  value: boolean | string;
+  value: string | number;
 };
 
 const Radio = ({

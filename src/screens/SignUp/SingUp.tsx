@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from 'navigation/types';
+import {RootStackParamList} from '../../navigation/types';
 import {normalize} from '@utils';
 import {colors, validators} from '@constants';
 import {
