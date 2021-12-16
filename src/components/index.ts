@@ -10,7 +10,9 @@ import ErrorMessage from './ErrorMessage';
 import BirthDatePicker from './BirthDatePicker';
 import DropDown from './DropDown';
 import Post from './Post';
+import Radio from './Radio';
 export {
+  Radio,
   Button,
   Typography,
   Slide,
