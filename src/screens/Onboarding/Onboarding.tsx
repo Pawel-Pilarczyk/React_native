@@ -7,11 +7,11 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from 'navigation/types';
+import {RootStackParamList} from '../../navigation/types';
 import {slidesData} from './slidesData';
 import {normalize} from '@utils';
 import {colors} from '@constants';
-import {Button, Slide} from '@components/index';
+import {Button, Slide, Switch} from '@components/index';
 
 export type TOnboardingProps = NativeStackScreenProps<
   RootStackParamList,

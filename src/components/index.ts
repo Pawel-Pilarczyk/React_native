@@ -10,7 +10,10 @@ import ErrorMessage from './ErrorMessage';
 import BirthDatePicker from './BirthDatePicker';
 import DropDown from './DropDown';
 import Post from './Post';
+import Radio from './Radio';
+import Switch from './Switch';
 export {
+  Radio,
   Button,
   Typography,
   Slide,
@@ -23,4 +26,5 @@ export {
   BirthDatePicker,
   DropDown,
   Post,
+  Switch,
 };

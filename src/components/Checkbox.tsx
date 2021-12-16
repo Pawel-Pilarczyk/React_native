@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import {normalize} from '@utils';
 import {colors} from '@constants';
-
 import {checkMark} from '@assets/images';
 
 type TCheckboxProps = {
