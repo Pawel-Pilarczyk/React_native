@@ -13,6 +13,7 @@ import {
   ForgotPasswordInitial,
   ForgorPasswordConfirmed,
   ResetPassword,
+  AddNewAccount,
 } from '@screens';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -26,7 +27,7 @@ const Navigation = () => {
           <>
             <RootStack.Screen
               name="Onboarding"
-              component={Onboarding}
+              component={AddNewAccount}
               options={{headerShown: false}}
             />
             <RootStack.Screen

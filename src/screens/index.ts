@@ -8,6 +8,7 @@ import SetupAccount from './SetupAccount/setupAccount';
 import ForgotPasswordInitial from './ForgotPasswordInitial/ForgotPasswordInitial';
 import ForgorPasswordConfirmed from './ForgotPasswordConfirmed/ForgorPasswordConfirmed';
 import ResetPassword from './ResetPassword/ResetPassword';
+import AddNewAccount from './AddNewAccount/AddNewAccount';
 
 export {
   Onboarding,
@@ -20,4 +21,5 @@ export {
   ForgotPasswordInitial,
   ForgorPasswordConfirmed,
   ResetPassword,
+  AddNewAccount,
 };
