@@ -12,6 +12,7 @@ import DropDown from './DropDown';
 import Post from './Post';
 import Radio from './Radio';
 import Switch from './Switch';
+import Plate from './Plate';
 export {
   Radio,
   Button,
@@ -27,4 +28,5 @@ export {
   DropDown,
   Post,
   Switch,
+  Plate,
 };
