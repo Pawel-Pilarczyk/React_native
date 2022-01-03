@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     height: normalize(56, 'height'),
     borderColor: '#F1F1FA',
     borderRadius: normalize(16, 'height'),
-    borderWidth: 1,
+    borderWidth: normalize(4, 'width'),
     fontSize: normalize(16, 'height'),
   },
   internalWrapperError: {

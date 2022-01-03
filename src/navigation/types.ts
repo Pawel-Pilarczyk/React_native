@@ -12,4 +12,5 @@ export type RootStackParamList = {
     email: string;
   };
   ResetPassword: undefined;
+  AddNewAccount: undefined;
 };

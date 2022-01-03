@@ -13,6 +13,8 @@ import {
   ForgotPasswordInitial,
   ForgorPasswordConfirmed,
   ResetPassword,
+  AddNewAccount,
+  SetupAccount,
 } from '@screens';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -64,6 +66,11 @@ const Navigation = () => {
               name="ResetPassword"
               component={ResetPassword}
               options={{headerTitleAlign: 'center', title: 'Forgot Password'}}
+            />
+            <RootStack.Screen
+              name="AddNewAccount"
+              component={SetupAccount}
+              options={{headerTitleAlign: 'center', title: 'Add new Account'}}
             />
           </>
         ) : (
