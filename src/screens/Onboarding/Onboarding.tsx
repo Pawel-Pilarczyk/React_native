@@ -11,7 +11,7 @@ import {RootStackParamList} from '../../navigation/types';
 import {slidesData} from './slidesData';
 import {normalize} from '@utils';
 import {colors} from '@constants';
-import {Button, Slide, Switch} from '@components/index';
+import {Button, Slide} from '@components/index';
 
 export type TOnboardingProps = NativeStackScreenProps<
   RootStackParamList,
