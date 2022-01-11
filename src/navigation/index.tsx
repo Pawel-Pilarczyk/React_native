@@ -28,7 +28,7 @@ const Navigation = () => {
           <>
             <RootStack.Screen
               name="Onboarding"
-              component={Onboarding}
+              component={UserProfile}
               options={{headerShown: false}}
             />
             <RootStack.Screen

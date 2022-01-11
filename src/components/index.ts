@@ -13,6 +13,7 @@ import Post from './Post';
 import Radio from './Radio';
 import Switch from './Switch';
 import Plate from './Plate';
+import PillDropdown from './PillDropdown';
 export {
   Radio,
   Button,
@@ -29,4 +30,5 @@ export {
   Post,
   Switch,
   Plate,
+  PillDropdown,
 };
